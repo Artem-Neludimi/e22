@@ -1,8 +1,9 @@
-import 'package:e22/extensions/rlf_context_extensions_pog.dart';
+import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../gen/assets.gen.dart';
+import 'package:e22/core/assets/gen/assets.gen.dart';
+
 import '../main.dart';
 import 'rlf_menu_pog.dart';
 import 'rlf_settings_pog.dart';

@@ -6,8 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../gen/assets.gen.dart';
-import '../presentation/rlf_video_screen_pog.dart';
+import '../core/assets/gen/assets.gen.dart';
 
 class RLFGameScreenPOG extends StatefulWidget {
   const RLFGameScreenPOG({super.key});
@@ -335,15 +334,7 @@ class _GameOverBottomSheetState extends State<_GameOverBottomSheet> {
                 ),
                 const SizedBox(height: 24),
                 RLFAppButtonPOG(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) => const RLFVideoScreenPog()))
-                        .whenComplete(
-                      () {
-                        widget.bloc.add(const RLFGameRestartPOG());
-                      },
-                    );
-                  },
+                  onPressed: () {},
                   child: FittedBox(
                     child: Text(
                       'WATCH AD & CONTINUE',

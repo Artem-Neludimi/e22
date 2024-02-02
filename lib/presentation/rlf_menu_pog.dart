@@ -6,7 +6,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
-import '../gen/assets.gen.dart';
+import 'package:e22/core/assets/gen/assets.gen.dart';
+
 import '../main.dart';
 import 'rlf_widgets_pog.dart';
 

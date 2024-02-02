@@ -1,8 +1,8 @@
-import 'package:e22/extensions/rlf_context_extensions_pog.dart';
+import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/presentation/rlf_widgets_pog.dart';
 import 'package:flutter/material.dart';
 
-import '../gen/assets.gen.dart';
+import 'package:e22/core/assets/gen/assets.gen.dart';
 
 class RLFOnboardingPog extends StatelessWidget {
   const RLFOnboardingPog({super.key});

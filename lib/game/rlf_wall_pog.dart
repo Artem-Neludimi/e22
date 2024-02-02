@@ -1,7 +1,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../gen/assets.gen.dart';
+import '../core/assets/gen/assets.gen.dart';
 import 'rlf_flame_game_pog.dart';
 
 class RLFWallPog extends SpriteComponent with HasGameRef<RLFFlameGamePog> {

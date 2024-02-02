@@ -7,7 +7,8 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../gen/assets.gen.dart';
+import 'package:e22/core/assets/gen/assets.gen.dart';
+
 import '../main.dart';
 
 class RLFSplashScreenPog extends StatefulWidget {

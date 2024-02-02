@@ -2,7 +2,7 @@ import 'package:e22/game/rlf_flame_game_pog.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../gen/assets.gen.dart';
+import '../core/assets/gen/assets.gen.dart';
 
 class RLFGroundPOG extends SpriteComponent with HasGameRef<RLFFlameGamePog> {
   @override

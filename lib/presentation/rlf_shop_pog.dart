@@ -1,11 +1,11 @@
-import 'package:e22/extensions/rlf_context_extensions_pog.dart';
+import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:e22/presentation/rlf_widgets_pog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../gen/assets.gen.dart';
+import 'package:e22/core/assets/gen/assets.gen.dart';
 
 class RLFShopPog extends StatefulWidget {
   const RLFShopPog({super.key, required this.bottomNavigationBar});
