@@ -11,7 +11,7 @@ class RLFWallPog extends SpriteComponent with HasGameRef<RLFFlameGamePog> {
 
   @override
   Future<void> onLoad() async {
-    sprite = await gameRef.loadSprite(Assets.images.rlfWallPog.path);
+    sprite = await gameRef.loadSprite('Assets.images.rlfWallPog.path');
     position = Vector2(
       isLeft ? 0 : gameRef.size.x - sprite!.image.width,
       gameRef.isSE ? posY - 779 : posY,

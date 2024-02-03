@@ -12,12 +12,12 @@ class RLFAppCubitPog extends Cubit<RLFAppStatePog> {
             score: rlfPrefsPog.getInt('score') ?? 0,
             trampolineCount: rlfPrefsPog.getInt('trampolineCount') ?? 0,
             scoreMultiplierCount: rlfPrefsPog.getInt('scoreMultiplierCount') ?? 0,
-            ballImage: rlfPrefsPog.getString('ballImage') ?? Assets.images.rlfBallPog.path,
-            avatarImage: rlfPrefsPog.getString('avatarImage') ?? Assets.images.rlfFootballer1Pog.path,
+            ballImage: rlfPrefsPog.getString('ballImage') ?? 'Assets.images.rlfBallPog.path,',
+            avatarImage: rlfPrefsPog.getString('avatarImage') ?? 'Assets.images.rlfFootballer1Pog.path',
             boughtImages: rlfPrefsPog.getStringList('boughtImages') ??
                 [
-                  Assets.images.rlfBallPog.path,
-                  Assets.images.rlfFootballer1Pog.path,
+                  'Assets.images.rlfBallPog.path',
+                  'Assets.images.rlfFootballer1Pog.path',
                 ],
             sound: true,
             isGainBonus: false,

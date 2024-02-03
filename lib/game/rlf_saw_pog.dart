@@ -9,7 +9,7 @@ class RLFSawPOG extends SpriteComponent with HasGameRef<RLFFlameGamePog> {
 
   @override
   Future<void> onLoad() async {
-    sprite = await gameRef.loadSprite(Assets.images.rlfSawPog.path);
+    sprite = await gameRef.loadSprite('Assets.images.rlfSawPog.path');
     size = Vector2(70, 70);
     anchor = Anchor.center;
     add(CircleHitbox());

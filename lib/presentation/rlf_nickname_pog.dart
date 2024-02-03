@@ -25,10 +25,10 @@ class _RLFNicknameScreenPOGState extends State<RLFNicknameScreenPOG> {
         height: double.maxFinite,
         width: double.maxFinite,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: Assets.images.rlfNicknameBgPog.provider(),
-            fit: BoxFit.cover,
-          ),
+          // image: DecorationImage(
+          //   image: Assets.images.rlfNicknameBgPog.provider(),
+          //   fit: BoxFit.cover,
+          // ),
         ),
         child: SafeArea(
           child: Padding(

@@ -395,7 +395,7 @@ class _BonusState extends State<_Bonus> {
           child: _isPick
               ? Column(
                   children: [
-                    Assets.images.rlfStarPog.image(),
+                    SizedBox.shrink(),
                     Text(
                       '1000',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -405,7 +405,7 @@ class _BonusState extends State<_Bonus> {
                     ),
                   ],
                 )
-              : Assets.images.rlfPresentPog.image(),
+              : SizedBox.shrink(),
         ),
       ),
     );

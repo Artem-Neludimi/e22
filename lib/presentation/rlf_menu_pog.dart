@@ -52,10 +52,10 @@ class _RLFMenuPogState extends State<RLFMenuPog> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: Assets.images.rlfMenuBgPog.provider(),
-            fit: BoxFit.cover,
-          ),
+          // image: DecorationImage(
+          //   image: Assets.images.rlfMenuBgPog.provider(),
+          //   fit: BoxFit.cover,
+          // ),
         ),
         child: SafeArea(
           child: Padding(

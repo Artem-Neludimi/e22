@@ -17,7 +17,7 @@ class RLFOnboardingPog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Assets.images.rlfGameOverviewPog.image(),
+              // Assets.images.rlfGameOverviewPog.image(),
               RLFGameButtonsPOG(
                 boostOnPressed: () {},
                 leftOnPressed: () {},

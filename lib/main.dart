@@ -49,11 +49,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const RLFSplashScreenPog(),
-          '/rlf-nickname-pog': (context) => const RLFNicknameScreenPOG(),
-          '/rlf-onboarding-pog': (context) => const RLFOnboardingPog(),
-          '/rlf-menu-pog': (context) => const RLFMenuPog(bottomNavigationBar: bottomNavigationBar),
-          '/rlf-game-screen-pog': (context) => const RLFGameScreenPOG(),
+          '/': (context) => const SbpSplashScreenJus(),
+          // '/rlf-nickname-pog': (context) => const RLFNicknameScreenPOG(),
+          // '/rlf-onboarding-pog': (context) => const RLFOnboardingPog(),
+          // '/rlf-menu-pog': (context) => const RLFMenuPog(bottomNavigationBar: bottomNavigationBar),
+          // '/rlf-game-screen-pog': (context) => const RLFGameScreenPOG(),
         },
       ),
     );

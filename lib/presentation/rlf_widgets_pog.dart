@@ -57,18 +57,18 @@ class RLFGameButtonsPOG extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       return Row(
         children: [
-          RLFRoundButtonPOG(
-            onPressed: leftOnPressed,
-            radius: (constraints.maxWidth - 72) / 4,
-            child: Assets.images.rlfLeftPog.image(),
-          ),
+          // RLFRoundButtonPOG(
+          //   onPressed: leftOnPressed,
+          //   radius: (constraints.maxWidth - 72) / 4,
+          //   child: Assets.images.rlfLeftPog.image(),
+          // ),
           const SizedBox(width: 24),
-          RLFRoundButtonPOG(
-            onPressed: haveTrampoline ? trampolineOnPressed : null,
-            radius: (constraints.maxWidth - 72) / 4,
-            color: Color.fromRGBO(66, 182, 70, haveTrampoline ? 1 : 0.2),
-            child: Assets.images.rlfTrampolinePog.image(),
-          ),
+          // RLFRoundButtonPOG(
+          //   onPressed: haveTrampoline ? trampolineOnPressed : null,
+          //   radius: (constraints.maxWidth - 72) / 4,
+          //   color: Color.fromRGBO(66, 182, 70, haveTrampoline ? 1 : 0.2),
+          //   child: Assets.images.rlfTrampolinePog.image(),
+          // ),
           const SizedBox(width: 24),
           RLFRoundButtonPOG(
             onPressed: haveMultiplier ? boostOnPressed : null,
@@ -82,11 +82,11 @@ class RLFGameButtonsPOG extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 24),
-          RLFRoundButtonPOG(
-            onPressed: rightOnPressed,
-            radius: (constraints.maxWidth - 72) / 4,
-            child: Assets.images.rlfRightPog.image(),
-          ),
+          // RLFRoundButtonPOG(
+          //   onPressed: rightOnPressed,
+          //   radius: (constraints.maxWidth - 72) / 4,
+          //   child: Assets.images.rlfRightPog.image(),
+          // ),
         ],
       );
     });
@@ -168,39 +168,39 @@ class RLFBottomNavigationBarPOG extends StatelessWidget {
                   : 0,
       elevation: 0,
       items: [
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Assets.images.rlfBallIconWhitePog.image(),
-          ),
-          activeIcon: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Assets.images.rlfBallIconGreenPog.image(),
-          ),
-          label: 'Game',
-        ),
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Assets.images.rlfShopIconWhitePog.image(),
-          ),
-          activeIcon: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Assets.images.rlfShopIconGreenPog.image(),
-          ),
-          label: 'Shop',
-        ),
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Assets.images.rlfSettingsIconWhitePog.image(),
-          ),
-          activeIcon: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Assets.images.rlfSettingsIconGreenPog.image(),
-          ),
-          label: 'Settings',
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Padding(
+        //     padding: const EdgeInsets.all(4),
+        //     child: Assets.images.rlfBallIconWhitePog.image(),
+        //   ),
+        //   activeIcon: Padding(
+        //     padding: const EdgeInsets.all(4),
+        //     child: Assets.images.rlfBallIconGreenPog.image(),
+        //   ),
+        //   label: 'Game',
+        // ),
+        // BottomNavigationBarItem(
+        //   icon: Padding(
+        //     padding: const EdgeInsets.all(4),
+        //     child: Assets.images.rlfShopIconWhitePog.image(),
+        //   ),
+        //   activeIcon: Padding(
+        //     padding: const EdgeInsets.all(4),
+        //     child: Assets.images.rlfShopIconGreenPog.image(),
+        //   ),
+        //   label: 'Shop',
+        // ),
+        // BottomNavigationBarItem(
+        //   icon: Padding(
+        //     padding: const EdgeInsets.all(4),
+        //     child: Assets.images.rlfSettingsIconWhitePog.image(),
+        //   ),
+        //   activeIcon: Padding(
+        //     padding: const EdgeInsets.all(4),
+        //     child: Assets.images.rlfSettingsIconGreenPog.image(),
+        //   ),
+        //   label: 'Settings',
+        // ),
       ],
     );
   }

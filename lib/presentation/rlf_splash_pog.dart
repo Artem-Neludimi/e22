@@ -1,120 +1,98 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:flame/flame.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
 
 import '../main.dart';
 
-class RLFSplashScreenPog extends StatefulWidget {
-  const RLFSplashScreenPog({super.key});
+class SbpSplashScreenJus extends StatefulWidget {
+  const SbpSplashScreenJus({super.key});
 
   @override
-  State<RLFSplashScreenPog> createState() => _RLFSplashScreenPogState();
+  State<SbpSplashScreenJus> createState() => _SbpSplashScreenJusState();
 }
 
-class _RLFSplashScreenPogState extends State<RLFSplashScreenPog> {
+class _SbpSplashScreenJusState extends State<SbpSplashScreenJus> {
   @override
   void initState() {
+    WidgetsFlutterBinding.ensureInitialized();
     Future.delayed(Duration.zero, () async {
-      await Flame.device.fullScreen();
-      await Flame.device.setPortraitDownOnly();
-      rlfPrefsPog = await SharedPreferences.getInstance();
-      FlameAudio.bgm.initialize();
-
-      await Future.delayed(const Duration(seconds: 2));
-      final name = rlfPrefsPog.getString('name');
-      if (name == null || name.isEmpty) {
-        Navigator.of(context).pushReplacementNamed('/rlf-nickname-pog');
-      } else {
-        Navigator.of(context).pushReplacementNamed('/rlf-menu-pog');
-      }
+      await _sbpSetDeviceType();
+      await _sbpInitDependencies();
+      // await _sbpHandleNavigation();
+      // await _sbpRequestTrackingPermission();
     });
     super.initState();
   }
 
+  Future<void> _sbpRequestTrackingPermission() async {
+    var status = await AppTrackingTransparency.requestTrackingAuthorization();
+
+    if (status == TrackingStatus.notDetermined) {
+      status = await AppTrackingTransparency.requestTrackingAuthorization();
+    }
+
+    if (status == TrackingStatus.authorized) {
+      developer.log('Permission granted');
+    } else {
+      developer.log('Permission denied');
+    }
+  }
+
+  Future<void> _sbpHandleNavigation() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final name = rlfPrefsPog.getString('name');
+    if (name == null || name.isEmpty) {
+      // Navigator.of(context).pushReplacementNamed('/rlf-nickname-pog');
+    } else {
+      // Navigator.of(context).pushReplacementNamed('/rlf-menu-pog');
+    }
+  }
+
+  Future<void> _sbpInitDependencies() async {
+    rlfPrefsPog = await SharedPreferences.getInstance();
+    FlameAudio.bgm.initialize();
+  }
+
+  Future<void> _sbpSetDeviceType() async {
+    await Flame.device.fullScreen();
+    await Flame.device.setPortrait();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       body: Container(
         height: double.maxFinite,
         width: double.maxFinite,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: Assets.images.rlfSplashBgPog.provider(),
+            image: Assets.images.sbpSplashBgJus.provider(),
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Assets.images.rlfIconPog.image(),
-            const SizedBox(height: 46),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('LOADING'),
-                SizedBox(width: 4),
-                SizedBox(
-                  width: 30,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: _ThreeDots(),
-                  ),
-                ),
-              ],
+        child: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(30, 30, 30, 1),
+              borderRadius: BorderRadius.circular(44),
             ),
-            const SizedBox(height: 46),
-          ],
+            child: Assets.lottie.sbpLoadingJus.lottie(
+              height: size.width * 0.5,
+              width: size.width * 0.5,
+            ),
+          ),
         ),
       ),
-    );
-  }
-}
-
-class _ThreeDots extends StatefulWidget {
-  const _ThreeDots();
-
-  @override
-  State<_ThreeDots> createState() => _ThreeDotsState();
-}
-
-class _ThreeDotsState extends State<_ThreeDots> {
-  Timer? _timer;
-  String _dots = '';
-  @override
-  void initState() {
-    _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
-      setState(() {
-        if (_dots.length == 3) {
-          _dots = '';
-        } else {
-          _dots += '.';
-        }
-      });
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      _dots,
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: const Color.fromRGBO(66, 182, 70, 1),
-            letterSpacing: 4,
-          ),
     );
   }
 }

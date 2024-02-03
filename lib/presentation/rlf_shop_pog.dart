@@ -181,7 +181,7 @@ class _Boosts extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Assets.images.rlfStarPog.image(),
+                // Assets.images.rlfStarPog.image(),
                 const SizedBox(width: 2),
                 Text(
                   '500',
@@ -248,7 +248,7 @@ class _Boosts extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Assets.images.rlfStarPog.image(),
+                // Assets.images.rlfStarPog.image(),
                 const SizedBox(width: 2),
                 Text(
                   '500',
@@ -301,9 +301,9 @@ class _Balls extends StatefulWidget {
 class _BallsState extends State<_Balls> {
   int _index = 0;
   final _ballImages = [
-    Assets.images.rlfBallPog.path,
-    Assets.images.rlfBall2Pog.path,
-    Assets.images.rlfBall3Pog.path,
+    // Assets.images.rlfBallPog.path,
+    // Assets.images.rlfBall2Pog.path,
+    // Assets.images.rlfBall3Pog.path,
   ];
   @override
   Widget build(BuildContext context) {
@@ -383,7 +383,7 @@ class _BallsState extends State<_Balls> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (!isBallBought) ...[
-                  Assets.images.rlfStarPog.image(),
+                  // Assets.images.rlfStarPog.image(),
                   const SizedBox(width: 2),
                   Text(_index == 1 ? '1000' : '2000'),
                 ],
@@ -444,9 +444,9 @@ class _Avatars extends StatefulWidget {
 class _AvatarsState extends State<_Avatars> {
   int _index = 0;
   final _avatarImages = [
-    Assets.images.rlfFootballer1Pog.path,
-    Assets.images.rlfFootballer2Pog.path,
-    Assets.images.rlfFootballer3Pog.path,
+    // Assets.images.rlfFootballer1Pog.path,
+    // Assets.images.rlfFootballer2Pog.path,
+    // Assets.images.rlfFootballer3Pog.path,
   ];
   @override
   Widget build(BuildContext context) {
@@ -526,7 +526,7 @@ class _AvatarsState extends State<_Avatars> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (!isAvatarBought) ...[
-                  Assets.images.rlfStarPog.image(),
+                  // Assets.images.rlfStarPog.image(),
                   const SizedBox(width: 2),
                   Text(_index == 1 ? '1000' : '2000'),
                 ],
