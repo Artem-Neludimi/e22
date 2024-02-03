@@ -135,7 +135,7 @@ class _Item extends StatelessWidget {
                 '${index + 1}',
                 style: context.sourceSans(
                   size: 33,
-                  color: const Color.fromRGBO(224, 176, 104, 1),
+                  color: isAvailable ? Colors.white : const Color.fromRGBO(224, 176, 104, 1),
                   weight: FontWeight.w700,
                 ),
               ),
