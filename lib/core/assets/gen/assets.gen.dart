@@ -15,6 +15,10 @@ import 'package:lottie/lottie.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/sbp_crown_jus.png
+  AssetGenImage get sbpCrownJus =>
+      const AssetGenImage('assets/images/sbp_crown_jus.png');
+
   /// File path: assets/images/sbp_menu_bg_jus.png
   AssetGenImage get sbpMenuBgJus =>
       const AssetGenImage('assets/images/sbp_menu_bg_jus.png');
@@ -41,6 +45,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        sbpCrownJus,
         sbpMenuBgJus,
         sbpOnboardingBg1Jus,
         sbpOnboardingBg2Jus,

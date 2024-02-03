@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:e22/core/assets/gen/assets.gen.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
-import '../main.dart';
 import 'rlf_settings_pog.dart';
 import 'rlf_shop_pog.dart';
 import 'sbp_menu_jus.dart';

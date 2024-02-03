@@ -3,7 +3,9 @@
 import 'dart:developer' as developer;
 import 'dart:math';
 
+import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
@@ -59,14 +61,131 @@ class _SbpMenuJusState extends State<SbpMenuJus> {
         appBar: SbpAppBarJus(),
         bottomNavigationBar: widget.bottomNavigationBar,
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24).copyWith(bottom: 40),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [],
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Wrap(
+              verticalDirection: VerticalDirection.up,
+              children: List.generate(
+                40,
+                (index) {
+                  if (index % 3 == 0) return Center(child: _Item(index));
+                  return SizedBox(
+                    width: context.width / 2,
+                    child: Center(
+                      child: _Item(index),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _Item extends StatelessWidget {
+  const _Item(this.index);
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final isAvailable = index == 0;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 32),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            height: 70,
+            width: 120,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(25)),
+              color: isAvailable ? null : Colors.black,
+              gradient: isAvailable
+                  ? const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromRGBO(224, 176, 104, 1),
+                        Color.fromRGBO(78, 56, 38, 1),
+                      ],
+                    )
+                  : null,
+              border: isAvailable
+                  ? Border.all(
+                      color: Colors.white,
+                      width: 4,
+                    )
+                  : const GradientBoxBorder(
+                      width: 4,
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color.fromRGBO(224, 176, 104, 1),
+                          Color.fromRGBO(78, 56, 38, 1),
+                        ],
+                      ),
+                    ),
+            ),
+            child: Center(
+              child: Text(
+                '${index + 1}',
+                style: context.sourceSans(
+                  size: 33,
+                  color: const Color.fromRGBO(224, 176, 104, 1),
+                  weight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+          if (index != 0 && index != 1 && index != 2) ...[
+            Positioned(
+              bottom: -20,
+              left: 10,
+              right: 10,
+              height: 35,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(30, 30, 30, 1),
+                  borderRadius: BorderRadius.circular(15),
+                  border: const GradientBoxBorder(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromRGBO(224, 176, 104, 1),
+                        Color.fromRGBO(78, 56, 38, 1),
+                      ],
+                    ),
+                  ),
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '${index * 800}',
+                    style: context.sourceSans(
+                      size: 22,
+                      color: const Color.fromRGBO(224, 176, 104, 1),
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: -15,
+              right: 10,
+              child: Assets.images.sbpCrownJus.image(
+                height: 30,
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }
