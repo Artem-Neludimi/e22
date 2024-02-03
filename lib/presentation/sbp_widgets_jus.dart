@@ -219,7 +219,7 @@ Future<void> _noTransitionAnimation(BuildContext context, Widget screen) async {
   );
 }
 
-class SbpButtonJus extends StatelessWidget {
+class SbpButtonJus extends StatefulWidget {
   const SbpButtonJus({
     super.key,
     this.onPressed,
@@ -227,40 +227,61 @@ class SbpButtonJus extends StatelessWidget {
   });
   final VoidCallback? onPressed;
   final Widget? child;
+
+  @override
+  State<SbpButtonJus> createState() => _SbpButtonJusState();
+}
+
+class _SbpButtonJusState extends State<SbpButtonJus> {
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: context.isSE ? 55 : 70,
-        decoration: const BoxDecoration(
-          gradient: SweepGradient(
-            center: Alignment.bottomLeft,
-            colors: [
-              Color.fromRGBO(227, 164, 85, 1),
-              Color.fromRGBO(246, 219, 166, 1),
-              Color.fromRGBO(255, 235, 195, 1),
-              Color.fromRGBO(240, 190, 121, 1),
-              Color.fromRGBO(143, 101, 59, 1),
-              Color.fromRGBO(131, 80, 48, 1),
-              Color.fromRGBO(186, 127, 59, 1),
-              Color.fromRGBO(238, 188, 112, 1),
-              Color.fromRGBO(106, 62, 40, 1),
-            ],
-          ),
-          border: GradientBoxBorder(
-            width: 2,
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+      onLongPress: () => setState(() => isPressed = true),
+      onLongPressEnd: (_) {
+        setState(() => isPressed = false);
+        widget.onPressed?.call();
+      },
+      onTap: () async {
+        setState(() => isPressed = !isPressed);
+        await Future.delayed(const Duration(milliseconds: 100));
+        setState(() => isPressed = !isPressed);
+        widget.onPressed?.call();
+      },
+      child: AnimatedOpacity(
+        opacity: isPressed ? 0.5 : 1,
+        duration: const Duration(milliseconds: 100),
+        child: Container(
+          height: context.isSE ? 55 : 70,
+          decoration: const BoxDecoration(
+            gradient: SweepGradient(
+              center: Alignment.bottomLeft,
               colors: [
-                Color.fromRGBO(224, 176, 104, 1),
-                Color.fromRGBO(91, 69, 37, 1),
+                Color.fromRGBO(227, 164, 85, 1),
+                Color.fromRGBO(246, 219, 166, 1),
+                Color.fromRGBO(255, 235, 195, 1),
+                Color.fromRGBO(240, 190, 121, 1),
+                Color.fromRGBO(143, 101, 59, 1),
+                Color.fromRGBO(131, 80, 48, 1),
+                Color.fromRGBO(186, 127, 59, 1),
+                Color.fromRGBO(238, 188, 112, 1),
+                Color.fromRGBO(106, 62, 40, 1),
               ],
             ),
+            border: GradientBoxBorder(
+              width: 2,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(224, 176, 104, 1),
+                  Color.fromRGBO(91, 69, 37, 1),
+                ],
+              ),
+            ),
           ),
+          child: Center(child: widget.child),
         ),
-        child: Center(child: child),
       ),
     );
   }
