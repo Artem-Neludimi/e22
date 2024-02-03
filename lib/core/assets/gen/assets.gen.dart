@@ -17,12 +17,30 @@ class $AssetsImagesGen {
   AssetGenImage get sbpOnboardingBg1Jus =>
       const AssetGenImage('assets/images/sbp_onboarding_bg_1_jus.png');
 
+  /// File path: assets/images/sbp_onboarding_bg_2_jus.png
+  AssetGenImage get sbpOnboardingBg2Jus =>
+      const AssetGenImage('assets/images/sbp_onboarding_bg_2_jus.png');
+
+  /// File path: assets/images/sbp_onboarding_bg_3_jus.png
+  AssetGenImage get sbpOnboardingBg3Jus =>
+      const AssetGenImage('assets/images/sbp_onboarding_bg_3_jus.png');
+
   /// File path: assets/images/sbp_splash_bg_jus.png
   AssetGenImage get sbpSplashBgJus =>
       const AssetGenImage('assets/images/sbp_splash_bg_jus.png');
 
+  /// File path: assets/images/sbp_terms_of_use_bg_jus.png
+  AssetGenImage get sbpTermsOfUseBgJus =>
+      const AssetGenImage('assets/images/sbp_terms_of_use_bg_jus.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [sbpOnboardingBg1Jus, sbpSplashBgJus];
+  List<AssetGenImage> get values => [
+        sbpOnboardingBg1Jus,
+        sbpOnboardingBg2Jus,
+        sbpOnboardingBg3Jus,
+        sbpSplashBgJus,
+        sbpTermsOfUseBgJus
+      ];
 }
 
 class $AssetsLottieGen {

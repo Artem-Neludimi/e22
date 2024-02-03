@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
 
+import '../core/navigation/sbp_router_jus.dart';
 import 'sbp_widgets_jus.dart';
 
 class SbpTermsOfUseScreenJus extends StatelessWidget {
@@ -16,7 +17,7 @@ class SbpTermsOfUseScreenJus extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: Assets.images.sbpOnboardingBg1Jus.provider(),
+            image: Assets.images.sbpTermsOfUseBgJus.provider(),
             fit: BoxFit.cover,
           ),
         ),
@@ -55,11 +56,8 @@ You hereby grant to Company an irreversible, nonexclusive, royalty-free and full
                 ),
                 const SizedBox(height: 48),
                 SbpButtonJus(
-                  // onPressed: () => SbpRoutesJus.nickname.go(context),
-                  child: Text(
-                    'I agree',
-                    style: context.inter(size: 33, color: const Color.fromRGBO(221, 168, 95, 1)),
-                  ),
+                  onPressed: () => SbpRoutesJus.onboarding.go(context),
+                  text: 'I agree',
                 ),
               ],
             ),

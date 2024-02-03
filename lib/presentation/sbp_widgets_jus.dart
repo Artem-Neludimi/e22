@@ -223,10 +223,10 @@ class SbpButtonJus extends StatefulWidget {
   const SbpButtonJus({
     super.key,
     this.onPressed,
-    this.child,
+    required this.text,
   });
   final VoidCallback? onPressed;
-  final Widget? child;
+  final String text;
 
   @override
   State<SbpButtonJus> createState() => _SbpButtonJusState();
@@ -252,7 +252,7 @@ class _SbpButtonJusState extends State<SbpButtonJus> {
         opacity: isPressed ? 0.5 : 1,
         duration: const Duration(milliseconds: 100),
         child: Container(
-          height: context.isSE ? 55 : 70,
+          height: context.isSE ? 50 : 60,
           decoration: const BoxDecoration(
             gradient: SweepGradient(
               center: Alignment.bottomLeft,
@@ -280,7 +280,8 @@ class _SbpButtonJusState extends State<SbpButtonJus> {
               ),
             ),
           ),
-          child: Center(child: widget.child),
+          child: Center(
+              child: Text(widget.text, style: context.inter(color: const Color.fromRGBO(221, 168, 95, 1), size: 33))),
         ),
       ),
     );

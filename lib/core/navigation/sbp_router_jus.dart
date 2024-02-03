@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
+import '../../presentation/sbp_onboarding_jus.dart';
 import '../../presentation/sbp_terms_of_use_jus.dart';
 
 final _routerKey = GlobalKey<NavigatorState>();
@@ -20,12 +21,18 @@ final GoRouter sbpRouterJus = GoRouter(
       path: SbpRoutesJus.termsOfUse.path,
       builder: (context, state) => const SbpTermsOfUseScreenJus(),
     ),
+    GoRoute(
+      parentNavigatorKey: _routerKey,
+      path: SbpRoutesJus.onboarding.path,
+      builder: (context, state) => const SbpOnboardingJus(),
+    ),
   ],
 );
 
 enum SbpRoutesJus {
   sbpSplashJus('/'),
   termsOfUse('/sbp-terms-of-use-jus'),
+  onboarding('/sbp-onboarding-jus'),
   ;
 
   const SbpRoutesJus(this.path);
