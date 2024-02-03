@@ -1,19 +1,19 @@
 import 'dart:math';
 
-import 'package:e22/game/rlf_ground_pog.dart';
-import 'package:e22/game/rlf_world_pog.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 
-import 'rlf_flame_game_pog.dart';
-import 'rlf_game_bloc_pog.dart';
+import '../logic/rlf_game_bloc_pog.dart';
+import 'sbp_flame_game_jus.dart';
+import 'rlf_ground_pog.dart';
 import 'rlf_saw_pog.dart';
 import 'rlf_wall_pog.dart';
+import 'rlf_world_pog.dart';
 
 class RLFBallPog extends SpriteComponent
-    with HasGameRef<RLFFlameGamePog>, HasWorldReference<RLFWorldPog>, CollisionCallbacks {
+    with HasGameRef<SbpFlameGameJus>, HasWorldReference<RLFWorldPog>, CollisionCallbacks {
   static const double _gravity = 8;
   static const double _inertia = 1.5;
   static const double _groundColl = -400;

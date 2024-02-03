@@ -19,6 +19,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpCrownJus =>
       const AssetGenImage('assets/images/sbp_crown_jus.png');
 
+  /// File path: assets/images/sbp_game_bg_jus.png
+  AssetGenImage get sbpGameBgJus =>
+      const AssetGenImage('assets/images/sbp_game_bg_jus.png');
+
   /// File path: assets/images/sbp_menu_bg_jus.png
   AssetGenImage get sbpMenuBgJus =>
       const AssetGenImage('assets/images/sbp_menu_bg_jus.png');
@@ -46,6 +50,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         sbpCrownJus,
+        sbpGameBgJus,
         sbpMenuBgJus,
         sbpOnboardingBg1Jus,
         sbpOnboardingBg2Jus,

@@ -1,66 +1,22 @@
-import 'package:e22/game/rlf_flame_game_pog.dart';
-import 'package:e22/game/rlf_game_bloc_pog.dart';
-import 'package:e22/logic/rlf_app_cubit_pog.dart';
-import 'package:e22/presentation/sbp_widgets_jus.dart';
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../core/assets/gen/assets.gen.dart';
+import '../../logic/rlf_app_cubit_pog.dart';
+import '../../presentation/sbp_widgets_jus.dart';
+import '../logic/rlf_game_bloc_pog.dart';
 
-class RLFGameScreenPOG extends StatefulWidget {
-  const RLFGameScreenPOG({super.key});
+class SbpGameListenersJus extends StatelessWidget {
+  const SbpGameListenersJus({
+    super.key,
+    required this.child,
+  });
 
-  @override
-  State<RLFGameScreenPOG> createState() => _RLFGameScreenPOGState();
-}
-
-class _RLFGameScreenPOGState extends State<RLFGameScreenPOG> {
-  @override
-  Widget build(BuildContext context) {
-    return const PopScope(
-      canPop: false,
-      child: _RLFProviderPOG(
-        child: _RLFGamePresentationPOG(),
-      ),
-    );
-  }
-}
-
-class _RLFProviderPOG extends StatelessWidget {
-  const _RLFProviderPOG({required this.child});
   final Widget child;
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => RLFGameBlocPOG(),
-      child: child,
-    );
-  }
-}
+    final bloc = context.read<RLFGameBlocPOG>();
+    final appCubit = context.read<RLFAppCubitPog>();
 
-class _RLFGamePresentationPOG extends StatefulWidget {
-  const _RLFGamePresentationPOG();
-
-  @override
-  State<_RLFGamePresentationPOG> createState() => _RLFGamePresentationPOGState();
-}
-
-class _RLFGamePresentationPOGState extends State<_RLFGamePresentationPOG> {
-  late final Game game;
-  late final RLFAppCubitPog appCubit;
-  late final RLFGameBlocPOG bloc;
-  @override
-  void initState() {
-    bloc = context.read<RLFGameBlocPOG>();
-    appCubit = context.read<RLFAppCubitPog>();
-    game = RLFFlameGamePog(bloc, appCubit);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
         BlocListener<RLFGameBlocPOG, RLFGameStatePOG>(
@@ -110,101 +66,20 @@ class _RLFGamePresentationPOGState extends State<_RLFGamePresentationPOG> {
           },
         ),
       ],
-      child: Stack(
-        children: [
-          const SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-          ),
-          GameWidget(game: game),
-          _GameButtons(),
-          _PauseButton(bloc: bloc),
-          Positioned(
-            top: 18,
-            right: 33,
-            child: Material(
-              color: Colors.transparent,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    'SCORE',
-                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                          fontSize: 14,
-                          color: Colors.white.withOpacity(0.5),
-                        ),
-                  ),
-                  const SizedBox(height: 8),
-                  BlocBuilder<RLFGameBlocPOG, RLFGameStatePOG>(
-                    builder: (context, state) {
-                      return Text(
-                        '${state.score}',
-                        style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                              fontSize: 33,
-                            ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      child: child,
     );
   }
 }
 
-class _PauseButton extends StatelessWidget {
-  const _PauseButton({
-    required this.bloc,
-  });
-
-  final RLFGameBlocPOG bloc;
+class SbpProviderJus extends StatelessWidget {
+  const SbpProviderJus({super.key, required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 18,
-      left: 33,
-      child: Material(
-        color: Colors.transparent,
-        child: RLFRoundButtonPOG(
-          onPressed: () {
-            bloc.add(const RLFGamePausePOG());
-          },
-          radius: 66,
-          child: const Icon(
-            Icons.pause,
-            color: Colors.white,
-            size: 35,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _GameButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.watch<RLFGameBlocPOG>();
-    final appState = context.read<RLFAppCubitPog>().state;
-    return Positioned(
-      left: 24,
-      right: 24,
-      bottom: 24,
-      child: Material(
-        color: Colors.transparent,
-        child: RLFGameButtonsPOG(
-          leftOnPressed: () => bloc.add(const RLFGameJumpLeftPOG()),
-          rightOnPressed: () => bloc.add(const RLFGameJumpRightPOG()),
-          trampolineOnPressed: () => bloc.add(const RLFGameTrampolinePOG()),
-          boostOnPressed: () => bloc.add(const RLFGameMultiplierPOG()),
-          haveTrampoline: appState.trampolineCount > 0 && bloc.state.didUseTrampoline == false,
-          haveMultiplier: appState.scoreMultiplierCount > 0 && bloc.state.didUseScoreMultiplier == false,
-        ),
-      ),
+    return BlocProvider(
+      create: (context) => RLFGameBlocPOG(),
+      child: child,
     );
   }
 }
@@ -395,7 +270,7 @@ class _BonusState extends State<_Bonus> {
           child: _isPick
               ? Column(
                   children: [
-                    SizedBox.shrink(),
+                    const SizedBox.shrink(),
                     Text(
                       '1000',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -405,7 +280,7 @@ class _BonusState extends State<_Bonus> {
                     ),
                   ],
                 )
-              : SizedBox.shrink(),
+              : const SizedBox.shrink(),
         ),
       ),
     );

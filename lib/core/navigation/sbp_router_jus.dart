@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
+import '../../game/flutter/sbp_game_screen_jus.dart';
 import '../../presentation/sbp_menu_jus.dart';
 import '../../presentation/sbp_onboarding_jus.dart';
 import '../../presentation/sbp_terms_of_use_jus.dart';
@@ -53,7 +54,19 @@ final GoRouter sbpRouterJus = GoRouter(
           builder: (context, state) => const Scaffold(bottomNavigationBar: _menuBottomNavigationBar),
         ),
       ],
-    )
+    ),
+    GoRoute(
+      parentNavigatorKey: _routerKey,
+      path: SbpRoutesJus.game.path,
+      builder: (context, state) {
+        if (state.extra is int) {
+          return SbpGameScreenJus(
+            index: state.extra as int,
+          );
+        }
+        throw Exception();
+      },
+    ),
   ],
 );
 
@@ -65,6 +78,7 @@ enum SbpRoutesJus {
   tasks('/sbp-tasks-jus'),
   shop('/sbp-shop-jus'),
   settings('/sbp-settings-jus'),
+  game('/sbp-game-jus'),
   ;
 
   const SbpRoutesJus(this.path);

@@ -1,14 +1,14 @@
 import 'dart:math';
 
-import 'package:e22/game/rlf_flame_game_pog.dart';
-import 'package:e22/game/rlf_saw_pog.dart';
 import 'package:flame/components.dart';
 
 import 'rlf_ball_pog.dart';
+import 'sbp_flame_game_jus.dart';
 import 'rlf_ground_pog.dart';
+import 'rlf_saw_pog.dart';
 import 'rlf_wall_pog.dart';
 
-class RLFWorldPog extends World with HasGameRef<RLFFlameGamePog>, HasCollisionDetection {
+class RLFWorldPog extends World with HasGameRef<SbpFlameGameJus>, HasCollisionDetection {
   static const _wallHeight = 722;
   double _lastWall = -722;
 

@@ -4,6 +4,7 @@ import 'dart:developer' as developer;
 import 'dart:math';
 
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
+import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:rate_my_app/rate_my_app.dart';
@@ -92,34 +93,71 @@ class _Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isAvailable = index == 0;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 32),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            height: 70,
-            width: 120,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(25)),
-              color: isAvailable ? null : Colors.black,
-              gradient: isAvailable
-                  ? const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromRGBO(224, 176, 104, 1),
-                        Color.fromRGBO(78, 56, 38, 1),
-                      ],
-                    )
-                  : null,
-              border: isAvailable
-                  ? Border.all(
-                      color: Colors.white,
-                      width: 4,
-                    )
-                  : const GradientBoxBorder(
-                      width: 4,
+    return GestureDetector(
+      onTap: () {
+        SbpRoutesJus.game.push(context, extra: index);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 32),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              height: 70,
+              width: 120,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                color: isAvailable ? null : Colors.black,
+                gradient: isAvailable
+                    ? const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color.fromRGBO(224, 176, 104, 1),
+                          Color.fromRGBO(78, 56, 38, 1),
+                        ],
+                      )
+                    : null,
+                border: isAvailable
+                    ? Border.all(
+                        color: Colors.white,
+                        width: 4,
+                      )
+                    : const GradientBoxBorder(
+                        width: 4,
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromRGBO(224, 176, 104, 1),
+                            Color.fromRGBO(78, 56, 38, 1),
+                          ],
+                        ),
+                      ),
+              ),
+              child: Center(
+                child: Text(
+                  '${index + 1}',
+                  style: context.sourceSans(
+                    size: 33,
+                    color: isAvailable ? Colors.white : const Color.fromRGBO(224, 176, 104, 1),
+                    weight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+            if (index != 0 && index != 1 && index != 2) ...[
+              Positioned(
+                bottom: -20,
+                left: 10,
+                right: 10,
+                height: 35,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(30, 30, 30, 1),
+                    borderRadius: BorderRadius.circular(15),
+                    border: const GradientBoxBorder(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -129,63 +167,31 @@ class _Item extends StatelessWidget {
                         ],
                       ),
                     ),
-            ),
-            child: Center(
-              child: Text(
-                '${index + 1}',
-                style: context.sourceSans(
-                  size: 33,
-                  color: isAvailable ? Colors.white : const Color.fromRGBO(224, 176, 104, 1),
-                  weight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
-          if (index != 0 && index != 1 && index != 2) ...[
-            Positioned(
-              bottom: -20,
-              left: 10,
-              right: 10,
-              height: 35,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(30, 30, 30, 1),
-                  borderRadius: BorderRadius.circular(15),
-                  border: const GradientBoxBorder(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromRGBO(224, 176, 104, 1),
-                        Color.fromRGBO(78, 56, 38, 1),
-                      ],
-                    ),
                   ),
-                ),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '${index * 800}',
-                    style: context.sourceSans(
-                      size: 22,
-                      color: const Color.fromRGBO(224, 176, 104, 1),
-                      weight: FontWeight.w700,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '${index * 800}',
+                      style: context.sourceSans(
+                        size: 22,
+                        color: const Color.fromRGBO(224, 176, 104, 1),
+                        weight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: -15,
-              right: 10,
-              child: Assets.images.sbpCrownJus.image(
-                height: 30,
-                fit: BoxFit.fitHeight,
+              Positioned(
+                bottom: -15,
+                right: 10,
+                child: Assets.images.sbpCrownJus.image(
+                  height: 30,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
-            ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

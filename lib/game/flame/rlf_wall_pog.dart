@@ -1,10 +1,9 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../core/assets/gen/assets.gen.dart';
-import 'rlf_flame_game_pog.dart';
+import 'sbp_flame_game_jus.dart';
 
-class RLFWallPog extends SpriteComponent with HasGameRef<RLFFlameGamePog> {
+class RLFWallPog extends SpriteComponent with HasGameRef<SbpFlameGameJus> {
   final bool isLeft;
   final double posY;
   RLFWallPog(this.isLeft, this.posY) : super(priority: 1);

@@ -1,10 +1,9 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../core/assets/gen/assets.gen.dart';
-import 'rlf_flame_game_pog.dart';
+import 'sbp_flame_game_jus.dart';
 
-class RLFSawPOG extends SpriteComponent with HasGameRef<RLFFlameGamePog> {
+class RLFSawPOG extends SpriteComponent with HasGameRef<SbpFlameGameJus> {
   RLFSawPOG({super.position});
 
   @override
