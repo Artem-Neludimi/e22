@@ -8,9 +8,9 @@ import 'package:e22/core/assets/gen/assets.gen.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 import '../main.dart';
-import 'rlf_menu_pog.dart';
 import 'rlf_settings_pog.dart';
 import 'rlf_shop_pog.dart';
+import 'sbp_menu_jus.dart';
 
 class RLFAppButtonPOG extends StatelessWidget {
   const RLFAppButtonPOG({
@@ -128,95 +128,71 @@ class RLFRoundButtonPOG extends StatelessWidget {
   }
 }
 
-class RLFBottomNavigationBarPOG extends StatelessWidget {
-  const RLFBottomNavigationBarPOG({
+class SbpBottomNavigationBarJus extends StatelessWidget {
+  const SbpBottomNavigationBarJus({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isMenu = context.findAncestorWidgetOfExactType<RLFMenuPog>() != null;
+    final isMenu = context.findAncestorWidgetOfExactType<SbpMenuJus>() != null;
     final isShop = context.findAncestorWidgetOfExactType<RLFShopPog>() != null;
     final isSettings = context.findAncestorWidgetOfExactType<RLFSettingsPog>() != null;
-    return BottomNavigationBar(
-      onTap: (value) {
-        switch (value) {
-          case 0:
-            if (!isMenu) {
-              _noTransitionAnimation(context, const RLFMenuPog(bottomNavigationBar: bottomNavigationBar));
-            }
-
-          case 1:
-            if (!isShop) {
-              _noTransitionAnimation(context, const RLFShopPog(bottomNavigationBar: bottomNavigationBar));
-            }
-
-          case 2:
-            if (!isSettings) {
-              _noTransitionAnimation(context, const RLFSettingsPog(bottomNavigationBar: bottomNavigationBar));
-            }
-        }
-      },
-      backgroundColor: const Color.fromRGBO(42, 46, 131, 1),
-      selectedItemColor: const Color.fromRGBO(66, 182, 70, 1),
-      unselectedItemColor: Colors.white,
-      selectedFontSize: 16,
-      unselectedFontSize: 16,
-      currentIndex: isMenu
-          ? 0
-          : isShop
-              ? 1
-              : isSettings
-                  ? 2
-                  : 0,
-      elevation: 0,
-      items: const [
-        // BottomNavigationBarItem(
-        //   icon: Padding(
-        //     padding: const EdgeInsets.all(4),
-        //     child: Assets.images.rlfBallIconWhitePog.image(),
-        //   ),
-        //   activeIcon: Padding(
-        //     padding: const EdgeInsets.all(4),
-        //     child: Assets.images.rlfBallIconGreenPog.image(),
-        //   ),
-        //   label: 'Game',
-        // ),
-        // BottomNavigationBarItem(
-        //   icon: Padding(
-        //     padding: const EdgeInsets.all(4),
-        //     child: Assets.images.rlfShopIconWhitePog.image(),
-        //   ),
-        //   activeIcon: Padding(
-        //     padding: const EdgeInsets.all(4),
-        //     child: Assets.images.rlfShopIconGreenPog.image(),
-        //   ),
-        //   label: 'Shop',
-        // ),
-        // BottomNavigationBarItem(
-        //   icon: Padding(
-        //     padding: const EdgeInsets.all(4),
-        //     child: Assets.images.rlfSettingsIconWhitePog.image(),
-        //   ),
-        //   activeIcon: Padding(
-        //     padding: const EdgeInsets.all(4),
-        //     child: Assets.images.rlfSettingsIconGreenPog.image(),
-        //   ),
-        //   label: 'Settings',
-        // ),
-      ],
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(22),
+        topRight: Radius.circular(22),
+      ),
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: SweepGradient(
+            center: Alignment.bottomLeft,
+            colors: _sbpGradientColorsJus,
+          ),
+        ),
+        child: BottomNavigationBar(
+          onTap: (value) {},
+          backgroundColor: Colors.transparent,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.black,
+          selectedLabelStyle: context.sourceSans(size: 14),
+          unselectedLabelStyle: context.sourceSans(size: 14),
+          showUnselectedLabels: true,
+          currentIndex: isMenu
+              ? 0
+              : isShop
+                  ? 1
+                  : isSettings
+                      ? 2
+                      : 0,
+          elevation: 0,
+          items: [
+            BottomNavigationBarItem(
+              activeIcon: Assets.svg.sbpMapJus.svg(),
+              icon: Assets.svg.sbpMapJus.svg(color: Colors.black),
+              label: 'Game Map',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: Assets.svg.sbpTasksJus.svg(),
+              icon: Assets.svg.sbpTasksJus.svg(color: Colors.black),
+              label: 'Tasks',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: Assets.svg.sbpShopJus.svg(),
+              icon: Assets.svg.sbpShopJus.svg(color: Colors.black),
+              label: 'Shop',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: Assets.svg.sbpSettingsJus.svg(),
+              icon: Assets.svg.sbpSettingsJus.svg(color: Colors.black),
+              label: 'Settings',
+            ),
+          ],
+        ),
+      ),
     );
   }
-}
-
-Future<void> _noTransitionAnimation(BuildContext context, Widget screen) async {
-  await Navigator.of(context).pushReplacement(
-    PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => screen,
-      transitionDuration: Duration.zero,
-      reverseTransitionDuration: Duration.zero,
-    ),
-  );
 }
 
 class SbpButtonJus extends StatefulWidget {
@@ -256,17 +232,7 @@ class _SbpButtonJusState extends State<SbpButtonJus> {
           decoration: const BoxDecoration(
             gradient: SweepGradient(
               center: Alignment.bottomLeft,
-              colors: [
-                Color.fromRGBO(227, 164, 85, 1),
-                Color.fromRGBO(246, 219, 166, 1),
-                Color.fromRGBO(255, 235, 195, 1),
-                Color.fromRGBO(240, 190, 121, 1),
-                Color.fromRGBO(143, 101, 59, 1),
-                Color.fromRGBO(131, 80, 48, 1),
-                Color.fromRGBO(186, 127, 59, 1),
-                Color.fromRGBO(238, 188, 112, 1),
-                Color.fromRGBO(106, 62, 40, 1),
-              ],
+              colors: _sbpGradientColorsJus,
             ),
             border: GradientBoxBorder(
               width: 2,
@@ -322,3 +288,30 @@ class SbpBoardJus extends StatelessWidget {
     );
   }
 }
+
+class SbpAppBarJus extends PreferredSize {
+  SbpAppBarJus({super.key})
+      : super(
+          preferredSize: const Size.fromHeight(80),
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: SweepGradient(
+                center: Alignment(1, -1.05),
+                colors: _sbpGradientColorsJus,
+              ),
+            ),
+          ),
+        );
+}
+
+const _sbpGradientColorsJus = [
+  Color.fromRGBO(227, 164, 85, 1),
+  Color.fromRGBO(246, 219, 166, 1),
+  Color.fromRGBO(255, 235, 195, 1),
+  Color.fromRGBO(240, 190, 121, 1),
+  Color.fromRGBO(143, 101, 59, 1),
+  Color.fromRGBO(131, 80, 48, 1),
+  Color.fromRGBO(186, 127, 59, 1),
+  Color.fromRGBO(238, 188, 112, 1),
+  Color.fromRGBO(106, 62, 40, 1),
+];

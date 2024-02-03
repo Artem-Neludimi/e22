@@ -24,6 +24,7 @@ dependencies:
   app_tracking_transparency: ^2.0.4
   go_router: ^13.1.0
   gradient_borders: ^1.0.0
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -36,7 +37,7 @@ flutter_gen:
   output: lib/core/assets/gen/
   integrations:
     lottie: true
-
+    flutter_svg: true
 
 flutter:
   uses-material-design: true
@@ -45,6 +46,7 @@ flutter:
     - assets/images/
     - assets/audio/
     - assets/lottie/
+    - assets/svg/
 
   fonts:
     - family: BerlinSans

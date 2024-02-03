@@ -1,5 +1,6 @@
 import 'package:e22/core/assets/gen/assets.gen.dart';
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
+import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:e22/presentation/sbp_widgets_jus.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,7 @@ class _SbpOnboardingJusState extends State<SbpOnboardingJus> {
                   child: SbpButtonJus(
                     onPressed: () async {
                       if (_controller.page == 2) {
-                        // Navigator.of(context).pop();
+                        SbpRoutesJus.menu.go(context);
                         return;
                       }
                       await _controller.nextPage(

@@ -1,4 +1,3 @@
-import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:e22/presentation/sbp_widgets_jus.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late final SharedPreferences rlfPrefsPog;
-const bottomNavigationBar = RLFBottomNavigationBarPOG();
+const bottomNavigationBar = SbpBottomNavigationBarJus();
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor: const Color.fromRGBO(13, 12, 80, 1),
+          scaffoldBackgroundColor: Colors.transparent,
         ),
         routerConfig: sbpRouterJus,
       ),
