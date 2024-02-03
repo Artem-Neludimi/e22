@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
+import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
@@ -25,15 +26,15 @@ class _SbpSplashScreenJusState extends State<SbpSplashScreenJus> {
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
     Future.delayed(Duration.zero, () async {
-      await _sbpSetDeviceType();
-      await _sbpInitDependencies();
-      await _sbpRequestTrackingPermission();
-      // await _sbpHandleNavigation();
+      await _sbpSetDeviceTypeJus();
+      await _sbpInitDependenciesJus();
+      await _sbpRequestTrackingPermissionJus();
+      await _sbpHandleNavigationJus();
     });
     super.initState();
   }
 
-  Future<void> _sbpRequestTrackingPermission() async {
+  Future<void> _sbpRequestTrackingPermissionJus() async {
     var status = await AppTrackingTransparency.requestTrackingAuthorization();
 
     if (status == TrackingStatus.notDetermined) {
@@ -47,22 +48,17 @@ class _SbpSplashScreenJusState extends State<SbpSplashScreenJus> {
     }
   }
 
-  Future<void> _sbpHandleNavigation() async {
+  Future<void> _sbpHandleNavigationJus() async {
     await Future.delayed(const Duration(seconds: 2));
-    final name = rlfPrefsPog.getString('name');
-    if (name == null || name.isEmpty) {
-      // Navigator.of(context).pushReplacementNamed('/rlf-nickname-pog');
-    } else {
-      // Navigator.of(context).pushReplacementNamed('/rlf-menu-pog');
-    }
+    SbpRoutesJus.sbpOnboardingJus.go(context);
   }
 
-  Future<void> _sbpInitDependencies() async {
+  Future<void> _sbpInitDependenciesJus() async {
     rlfPrefsPog = await SharedPreferences.getInstance();
     FlameAudio.bgm.initialize();
   }
 
-  Future<void> _sbpSetDeviceType() async {
+  Future<void> _sbpSetDeviceTypeJus() async {
     await Flame.device.fullScreen();
     await Flame.device.setPortrait();
   }
