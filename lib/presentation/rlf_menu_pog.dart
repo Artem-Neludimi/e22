@@ -9,7 +9,7 @@ import 'package:rate_my_app/rate_my_app.dart';
 import 'package:e22/core/assets/gen/assets.gen.dart';
 
 import '../main.dart';
-import 'rlf_widgets_pog.dart';
+import 'sbp_widgets_jus.dart';
 
 class RLFMenuPog extends StatefulWidget {
   const RLFMenuPog({super.key, required this.bottomNavigationBar});

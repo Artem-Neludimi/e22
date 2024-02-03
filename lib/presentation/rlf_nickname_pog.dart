@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e22/core/assets/gen/assets.gen.dart';
 
 import '../logic/rlf_app_cubit_pog.dart';
-import 'rlf_widgets_pog.dart';
+import 'sbp_widgets_jus.dart';
 
 class RLFNicknameScreenPOG extends StatefulWidget {
   const RLFNicknameScreenPOG({super.key});

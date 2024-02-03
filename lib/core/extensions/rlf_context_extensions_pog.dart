@@ -10,16 +10,15 @@ extension RlfContextExtensionsPog on BuildContext {
     );
   }
 
-  bool get isSE {
-    final size = MediaQuery.sizeOf(this);
-    return size.width <= 400;
-  }
+  double get width => MediaQuery.sizeOf(this).width;
+  double get height => MediaQuery.sizeOf(this).height;
+  bool get isSE => width <= 400;
 
-  TextStyle inter([
+  TextStyle inter({
     double size = 16,
     Color color = Colors.white,
-    FontWeight weight = FontWeight.normal,
-  ]) {
+    FontWeight weight = FontWeight.w500,
+  }) {
     if (isSE) size = size * 0.8;
     return TextStyle(
       fontFamily: 'Inter',
@@ -29,11 +28,11 @@ extension RlfContextExtensionsPog on BuildContext {
     );
   }
 
-  TextStyle sourceSans([
+  TextStyle sourceSans({
     double size = 20,
     Color color = Colors.white,
     FontWeight weight = FontWeight.normal,
-  ]) {
+  }) {
     if (isSE) size = size * 0.8;
     return TextStyle(
       fontFamily: 'SourceSans',
@@ -43,11 +42,11 @@ extension RlfContextExtensionsPog on BuildContext {
     );
   }
 
-  TextStyle berlinSans([
+  TextStyle berlinSans({
     double size = 32,
     Color color = Colors.white,
     FontWeight weight = FontWeight.w800,
-  ]) {
+  }) {
     if (isSE) size = size * 0.8;
     return TextStyle(
       fontFamily: 'BerlinSans',

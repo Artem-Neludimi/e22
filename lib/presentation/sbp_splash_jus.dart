@@ -50,7 +50,7 @@ class _SbpSplashScreenJusState extends State<SbpSplashScreenJus> {
 
   Future<void> _sbpHandleNavigationJus() async {
     await Future.delayed(const Duration(seconds: 2));
-    SbpRoutesJus.sbpOnboardingJus.go(context);
+    SbpRoutesJus.termsOfUse.go(context);
   }
 
   Future<void> _sbpInitDependenciesJus() async {
