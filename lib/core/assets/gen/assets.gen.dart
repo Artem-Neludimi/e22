@@ -39,6 +39,14 @@ class $AssetsImagesGen {
   AssetGenImage get sbpOnboardingBg3Jus =>
       const AssetGenImage('assets/images/sbp_onboarding_bg_3_jus.png');
 
+  /// File path: assets/images/sbp_pause_jus.png
+  AssetGenImage get sbpPauseJus =>
+      const AssetGenImage('assets/images/sbp_pause_jus.png');
+
+  /// File path: assets/images/sbp_restart_jus.png
+  AssetGenImage get sbpRestartJus =>
+      const AssetGenImage('assets/images/sbp_restart_jus.png');
+
   /// File path: assets/images/sbp_splash_bg_jus.png
   AssetGenImage get sbpSplashBgJus =>
       const AssetGenImage('assets/images/sbp_splash_bg_jus.png');
@@ -55,6 +63,8 @@ class $AssetsImagesGen {
         sbpOnboardingBg1Jus,
         sbpOnboardingBg2Jus,
         sbpOnboardingBg3Jus,
+        sbpPauseJus,
+        sbpRestartJus,
         sbpSplashBgJus,
         sbpTermsOfUseBgJus
       ];

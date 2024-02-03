@@ -1,11 +1,7 @@
-import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/logic/rlf_app_cubit_pog.dart';
-import 'package:e22/presentation/sbp_widgets_jus.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:e22/core/assets/gen/assets.gen.dart';
 
 class RLFShopPog extends StatefulWidget {
   const RLFShopPog({super.key, required this.bottomNavigationBar});
@@ -201,20 +197,6 @@ class _Boosts extends StatelessWidget {
                       .copyWith(color: Colors.white.withOpacity(0.5), fontSize: 18),
                 ),
                 const SizedBox(height: 16),
-                RLFAppButtonPOG(
-                  onPressed: () {
-                    try {
-                      context.read<RLFAppCubitPog>().tryBuyTrampoline();
-                      context.showSnackBar('Trampoline bought');
-                    } catch (e) {
-                      context.showSnackBar('Not enough score');
-                    }
-                  },
-                  child: Text(
-                    'BUY',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
               ],
             ),
           ),
@@ -268,20 +250,6 @@ class _Boosts extends StatelessWidget {
                       .copyWith(color: Colors.white.withOpacity(0.5), fontSize: 18),
                 ),
                 const SizedBox(height: 16),
-                RLFAppButtonPOG(
-                  onPressed: () {
-                    try {
-                      context.read<RLFAppCubitPog>().tryBuyScoreMultiplier();
-                      context.showSnackBar('Score multiplier bought');
-                    } catch (e) {
-                      context.showSnackBar('Not enough score');
-                    }
-                  },
-                  child: Text(
-                    'BUY',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
               ],
             ),
           ),
@@ -309,7 +277,6 @@ class _BallsState extends State<_Balls> {
   Widget build(BuildContext context) {
     final appState = context.watch<RLFAppCubitPog>().state;
     final isBallBought = appState.isImageBought(_ballImages[_index]);
-    final isBallEquipped = appState.isBallEquipped(_ballImages[_index]);
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: [
@@ -390,42 +357,11 @@ class _BallsState extends State<_Balls> {
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: RLFAppButtonPOG(
-                  onPressed: () {
-                    if (!isBallBought) {
-                      final price = _index == 1 ? 1000 : 2000;
-                      final image = _ballImages[_index];
-                      try {
-                        context.read<RLFAppCubitPog>().tryBuyImage(image, price);
-                        context.showSnackBar('Ball bought');
-                        return;
-                      } catch (e) {
-                        context.showSnackBar('Not enough score');
-                      }
-                    } else {
-                      try {
-                        context.read<RLFAppCubitPog>().tryEquipBall(_ballImages[_index]);
-                        return;
-                      } catch (e) {
-                        context.showSnackBar('Ball already equipped');
-                      }
-                    }
-                  },
-                  child: Text(
-                    !isBallBought
-                        ? 'BUY'
-                        : isBallEquipped
-                            ? 'EQUIPPED'
-                            : 'EQUIP',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
-              ),
+              padding: EdgeInsets.all(8.0),
+              child: Center(),
             ),
           )
         ],
@@ -538,39 +474,17 @@ class _AvatarsState extends State<_Avatars> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
-                child: RLFAppButtonPOG(
-                  onPressed: () {
-                    if (!isAvatarBought) {
-                      final price = _index == 1 ? 1000 : 2000;
-                      final image = _avatarImages[_index];
-                      try {
-                        context.read<RLFAppCubitPog>().tryBuyImage(image, price);
-                        context.showSnackBar('Avatar bought');
-                        return;
-                      } catch (e) {
-                        context.showSnackBar('Not enough score');
-                      }
-                    } else {
-                      try {
-                        context.read<RLFAppCubitPog>().tryEquipAvatar(_avatarImages[_index]);
-                        return;
-                      } catch (e) {
-                        context.showSnackBar('Avatar already equipped');
-                      }
-                    }
-                  },
-                  child: Text(
-                    !isAvatarBought
-                        ? 'BUY'
-                        : isAvatarEquipped
-                            ? 'EQUIPPED'
-                            : 'EQUIP',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                child: Text(
+                  !isAvatarBought
+                      ? 'BUY'
+                      : isAvatarEquipped
+                          ? 'EQUIPPED'
+                          : 'EQUIP',
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

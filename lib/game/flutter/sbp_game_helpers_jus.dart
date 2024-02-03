@@ -120,7 +120,7 @@ class _PauseModalBottomSheet extends StatelessWidget {
               style: Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 32),
-            RLFAppButtonPOG(
+            SbpButtonJus(
               onPressed: () {
                 appCubit.addScore(bloc.state.score);
                 final navigator = Navigator.of(context);
@@ -128,21 +128,9 @@ class _PauseModalBottomSheet extends StatelessWidget {
                   navigator.pop();
                 }
               },
-              child: Text(
-                'MAIN MENU',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+              text: '',
             ),
             const SizedBox(height: 24),
-            RLFAppButtonPOG(
-              onPressed: () {
-                bloc.add(const RLFGameResumePOG());
-              },
-              child: Text(
-                'BACK TO GAME',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
           ],
         ),
       ),
@@ -194,7 +182,7 @@ class _GameOverBottomSheetState extends State<_GameOverBottomSheet> {
               ),
               if (appCubit.state.isGainBonus) ...[
                 const SizedBox(height: 24),
-                RLFAppButtonPOG(
+                SbpButtonJus(
                   onPressed: () {
                     appCubit.addScore(widget.bloc.state.score);
                     final navigator = Navigator.of(context);
@@ -202,21 +190,9 @@ class _GameOverBottomSheetState extends State<_GameOverBottomSheet> {
                       navigator.pop();
                     }
                   },
-                  child: Text(
-                    'MAIN MENU',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                  text: '',
                 ),
                 const SizedBox(height: 24),
-                RLFAppButtonPOG(
-                  onPressed: () {},
-                  child: FittedBox(
-                    child: Text(
-                      'WATCH AD & CONTINUE',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ),
               ] else ...[
                 Divider(
                   height: 48,
