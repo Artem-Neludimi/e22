@@ -27,8 +27,8 @@ class _SbpSplashScreenJusState extends State<SbpSplashScreenJus> {
     Future.delayed(Duration.zero, () async {
       await _sbpSetDeviceType();
       await _sbpInitDependencies();
+      await _sbpRequestTrackingPermission();
       // await _sbpHandleNavigation();
-      // await _sbpRequestTrackingPermission();
     });
     super.initState();
   }
