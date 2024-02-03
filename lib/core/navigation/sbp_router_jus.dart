@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import '../../presentation/rlf_onboarding_pog.dart';
 
 final _routerKey = GlobalKey<NavigatorState>();
-final _homeKey = GlobalKey<NavigatorState>();
 
 final GoRouter sbpRouterJus = GoRouter(
   navigatorKey: _routerKey,

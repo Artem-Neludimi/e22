@@ -25,21 +25,6 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          fontFamily: 'Ubuntu',
-          textTheme: TextTheme(
-            bodyMedium: TextStyle(
-              fontSize: context.isSE ? 14 : 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            displayMedium: TextStyle(
-              fontFamily: 'Montserrat',
-              fontSize: context.isSE ? 44 : 66,
-              fontWeight: FontWeight.w900,
-              color: Colors.white,
-              height: 0.8,
-            ),
-          ),
           scaffoldBackgroundColor: const Color.fromRGBO(13, 12, 80, 1),
         ),
         routerConfig: sbpRouterJus,
