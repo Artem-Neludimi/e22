@@ -1,9 +1,9 @@
-import 'package:e22/presentation/rlf_splash_pog.dart';
+import 'package:e22/presentation/sbp_splash_jus.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../../presentation/rlf_onboarding_pog.dart';
+import '../../presentation/sbp_onboarding_jus.dart';
 
 final _routerKey = GlobalKey<NavigatorState>();
 
@@ -18,7 +18,7 @@ final GoRouter sbpRouterJus = GoRouter(
     GoRoute(
       parentNavigatorKey: _routerKey,
       path: SbpRoutesJus.sbpOnboardingJus.path,
-      builder: (context, state) => const RLFOnboardingPog(),
+      builder: (context, state) => const SbpOnboardingJus(),
     ),
   ],
 );

@@ -13,12 +13,16 @@ import 'package:lottie/lottie.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/sbp_onboarding_bg_1_jus.png
+  AssetGenImage get sbpOnboardingBg1Jus =>
+      const AssetGenImage('assets/images/sbp_onboarding_bg_1_jus.png');
+
   /// File path: assets/images/sbp_splash_bg_jus.png
   AssetGenImage get sbpSplashBgJus =>
       const AssetGenImage('assets/images/sbp_splash_bg_jus.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [sbpSplashBgJus];
+  List<AssetGenImage> get values => [sbpOnboardingBg1Jus, sbpSplashBgJus];
 }
 
 class $AssetsLottieGen {
