@@ -171,77 +171,80 @@ class _SbpWinDialogJus extends StatelessWidget {
   final SbpGameConfigCubit gameConfigCubit;
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Center(
-        child: Stack(
-          children: [
-            Assets.images.sbpDialogJus.image(),
-            Positioned(
-              top: 62,
-              right: 0,
-              left: 0,
-              child: Center(
-                child: Text(
-                  'YOU WIN',
-                  style: context.berlinSans(size: 44),
+    return PopScope(
+      canPop: false,
+      child: Material(
+        color: Colors.transparent,
+        child: Center(
+          child: Stack(
+            children: [
+              Assets.images.sbpDialogJus.image(),
+              Positioned(
+                top: 62,
+                right: 0,
+                left: 0,
+                child: Center(
+                  child: Text(
+                    'YOU WIN',
+                    style: context.berlinSans(size: 44),
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              top: 170,
-              right: 0,
-              left: 0,
-              child: Center(
+              Positioned(
+                top: 170,
+                right: 0,
+                left: 0,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Your prize:',
+                        style: context.berlinSans(
+                          size: 28,
+                          color: Colors.white,
+                          weight: FontWeight.w100,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Assets.images.sbpCrownJus.image(),
+                          const SizedBox(width: 4),
+                          Text(
+                            gameConfigCubit.state.score.toString(),
+                            style: context.berlinSans(
+                              size: 28,
+                              color: Colors.white,
+                              weight: FontWeight.w100,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 30,
+                right: 45,
+                left: 45,
                 child: Column(
                   children: [
-                    Text(
-                      'Your prize:',
-                      style: context.berlinSans(
-                        size: 28,
-                        color: Colors.white,
-                        weight: FontWeight.w100,
-                      ),
+                    SbpButtonJus(
+                      isBlack: true,
+                      text: 'Return to map',
+                      onPressed: () {
+                        while (context.canPop()) {
+                          context.pop();
+                        }
+                      },
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Assets.images.sbpCrownJus.image(),
-                        const SizedBox(width: 4),
-                        Text(
-                          gameConfigCubit.state.score.toString(),
-                          style: context.berlinSans(
-                            size: 28,
-                            color: Colors.white,
-                            weight: FontWeight.w100,
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 30,
-              right: 45,
-              left: 45,
-              child: Column(
-                children: [
-                  SbpButtonJus(
-                    isBlack: true,
-                    text: 'Return to map',
-                    onPressed: () {
-                      while (context.canPop()) {
-                        context.pop();
-                      }
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -260,26 +263,29 @@ class _SbpOnboardingDialogJusState extends State<_SbpOnboardingDialogJus> {
   bool _isTimerStarted = false;
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: _isTimerStarted
-          ? _TimerDialog(gameConfigCubit: widget.gameConfigCubit)
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Assets.images.sbpGameOnboardingDialogJus.image(),
-                  const SizedBox(height: 4),
-                  SbpButtonJus(
-                    text: 'Start game',
-                    onPressed: () {
-                      setState(() => _isTimerStarted = true);
-                    },
-                  ),
-                ],
+    return PopScope(
+      canPop: false,
+      child: Material(
+        color: Colors.transparent,
+        child: _isTimerStarted
+            ? _TimerDialog(gameConfigCubit: widget.gameConfigCubit)
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Assets.images.sbpGameOnboardingDialogJus.image(),
+                    const SizedBox(height: 4),
+                    SbpButtonJus(
+                      text: 'Start game',
+                      onPressed: () {
+                        setState(() => _isTimerStarted = true);
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }

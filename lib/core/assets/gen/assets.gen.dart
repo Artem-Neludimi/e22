@@ -63,6 +63,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpSplashBgJus =>
       const AssetGenImage('assets/images/sbp_splash_bg_jus.png');
 
+  /// File path: assets/images/sbp_target_jus.png
+  AssetGenImage get sbpTargetJus =>
+      const AssetGenImage('assets/images/sbp_target_jus.png');
+
   /// File path: assets/images/sbp_terms_of_use_bg_jus.png
   AssetGenImage get sbpTermsOfUseBgJus =>
       const AssetGenImage('assets/images/sbp_terms_of_use_bg_jus.png');
@@ -81,6 +85,7 @@ class $AssetsImagesGen {
         sbpPauseJus,
         sbpRestartJus,
         sbpSplashBgJus,
+        sbpTargetJus,
         sbpTermsOfUseBgJus
       ];
 }

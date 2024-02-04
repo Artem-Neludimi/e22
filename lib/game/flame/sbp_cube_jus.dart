@@ -6,8 +6,11 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'sbp_game_jus.dart';
 import 'sbp_level_boundaries_jus.dart';
 import '../../core/assets/gen/assets.gen.dart';
+import 'sbp_target_jus.dart';
 
 class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, CollisionCallbacks {
+  SbpCubeJus() : super(priority: 2);
+
   static const double _size = 45;
   static const double _speed = 300;
   static const double _speedCompensation = 7;
@@ -63,7 +66,6 @@ class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, Colli
       }
       gameRef.cubeBloc.add(const SbpCubeStopEventJus());
     }
-
     super.onCollision(intersectionPoints, other);
   }
 }

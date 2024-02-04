@@ -22,6 +22,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
     size = Vector2.all(_size);
     paint = Paint()..color = const Color(0x00000000);
     _manageCubeInitialPosition();
+    _manageTargetInitialPosition();
     _addingLevelHitBox();
     _blocListener();
     return super.onLoad();
@@ -49,6 +50,14 @@ class SbpLevelBoundariesJus extends RectangleComponent
     cube.position = Vector2(
       gameRef.size.x / 2 - _size / 2 + 24,
       gameRef.size.y / 2 - _size / 6 + 24,
+    );
+  }
+
+  void _manageTargetInitialPosition() {
+    final target = world.target;
+    target.position = Vector2(
+      gameRef.size.x / 2 - _size / 2 + 24,
+      gameRef.size.y / 2 + 24,
     );
   }
 
