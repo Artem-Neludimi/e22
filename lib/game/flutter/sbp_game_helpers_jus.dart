@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/game/logic/sbp_game_config_cubit.dart';
 import 'package:e22/presentation/sbp_widgets_jus.dart';
@@ -31,13 +33,19 @@ class SbpProviderJus extends StatelessWidget {
   }
 }
 
-class SbpGameListenersJus extends StatelessWidget {
+class SbpGameListenersJus extends StatefulWidget {
   const SbpGameListenersJus({
     super.key,
     required this.child,
   });
 
   final Widget child;
+
+  @override
+  State<SbpGameListenersJus> createState() => _SbpGameListenersJusState();
+}
+
+class _SbpGameListenersJusState extends State<SbpGameListenersJus> {
   @override
   Widget build(BuildContext context) {
     final gameConfigCubit = context.read<SbpGameConfigCubit>();
@@ -53,8 +61,18 @@ class SbpGameListenersJus extends StatelessWidget {
             context.read<SbpGameConfigCubit>().sbpHidePauseJus();
           },
         ),
+        BlocListener<SbpGameConfigCubit, SbpGameConfigState>(
+          listenWhen: (previous, current) => previous.onboarding == false && current.onboarding == true,
+          listener: (context, state) async {
+            await showDialog(
+              context: context,
+              builder: (context) => _SbpOnboardingDialogJus(gameConfigCubit),
+            );
+            context.read<SbpGameConfigCubit>().sbpHideOnboardingJus();
+          },
+        ),
       ],
-      child: child,
+      child: widget.child,
     );
   }
 }
@@ -132,6 +150,84 @@ class _SbpPauseDialogJus extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SbpOnboardingDialogJus extends StatefulWidget {
+  const _SbpOnboardingDialogJus(this.gameConfigCubit);
+  final SbpGameConfigCubit gameConfigCubit;
+
+  @override
+  State<_SbpOnboardingDialogJus> createState() => _SbpOnboardingDialogJusState();
+}
+
+class _SbpOnboardingDialogJusState extends State<_SbpOnboardingDialogJus> {
+  bool _isTimerStarted = false;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: _isTimerStarted
+          ? _TimerDialog(gameConfigCubit: widget.gameConfigCubit)
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Assets.images.sbpGameOnboardingDialogJus.image(),
+                  const SizedBox(height: 4),
+                  SbpButtonJus(
+                    text: 'Start game',
+                    onPressed: () {
+                      setState(() => _isTimerStarted = true);
+                    },
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+}
+
+class _TimerDialog extends StatefulWidget {
+  const _TimerDialog({required this.gameConfigCubit});
+  final SbpGameConfigCubit gameConfigCubit;
+  @override
+  State<_TimerDialog> createState() => _TimerDialogState();
+}
+
+class _TimerDialogState extends State<_TimerDialog> {
+  Timer? _timer;
+  @override
+  initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (timer.tick == 3) {
+        widget.gameConfigCubit.sbpHideOnboardingJus();
+        context.pop();
+      }
+
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer!.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        '${3 - _timer!.tick}',
+        style: context.sourceSans(
+          size: 77,
+          color: const Color(0xFFE0B068),
         ),
       ),
     );

@@ -31,6 +31,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpGameBgJus =>
       const AssetGenImage('assets/images/sbp_game_bg_jus.png');
 
+  /// File path: assets/images/sbp_game_onboarding_dialog_jus.png
+  AssetGenImage get sbpGameOnboardingDialogJus =>
+      const AssetGenImage('assets/images/sbp_game_onboarding_dialog_jus.png');
+
   /// File path: assets/images/sbp_menu_bg_jus.png
   AssetGenImage get sbpMenuBgJus =>
       const AssetGenImage('assets/images/sbp_menu_bg_jus.png');
@@ -69,6 +73,7 @@ class $AssetsImagesGen {
         sbpCubeJus,
         sbpDialogJus,
         sbpGameBgJus,
+        sbpGameOnboardingDialogJus,
         sbpMenuBgJus,
         sbpOnboardingBg1Jus,
         sbpOnboardingBg2Jus,

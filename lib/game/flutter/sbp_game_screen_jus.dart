@@ -19,8 +19,8 @@ class SbpGameScreenJus extends StatelessWidget {
       canPop: true,
       child: SbpProviderJus(
         index: index,
-        child: const SbpGameListenersJus(
-          child: _SbpGameViewJus(),
+        child: SbpGameListenersJus(
+          child: _SbpGameViewJus(index),
         ),
       ),
     );
@@ -28,7 +28,8 @@ class SbpGameScreenJus extends StatelessWidget {
 }
 
 class _SbpGameViewJus extends StatefulWidget {
-  const _SbpGameViewJus();
+  const _SbpGameViewJus(this.level);
+  final int level;
 
   @override
   State<_SbpGameViewJus> createState() => _SbpGameViewJusState();
@@ -45,6 +46,7 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
     appCubit = context.read<RLFAppCubitPog>();
     gameConfigCubit = context.read<SbpGameConfigCubit>();
     game = SbpFlameGameJus(cubeBloc, appCubit, gameConfigCubit);
+    if (widget.level == 0) gameConfigCubit.sbpShowOnboardingJus();
     super.initState();
   }
 
