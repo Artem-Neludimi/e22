@@ -71,6 +71,16 @@ class _SbpGameListenersJusState extends State<SbpGameListenersJus> {
             context.read<SbpGameConfigCubit>().sbpHideOnboardingJus();
           },
         ),
+        BlocListener<SbpGameConfigCubit, SbpGameConfigState>(
+          listenWhen: (previous, current) => previous.win == false && current.win == true,
+          listener: (context, state) async {
+            await showDialog(
+              context: context,
+              builder: (context) => _SbpWinDialogJus(gameConfigCubit),
+            );
+            context.read<SbpGameConfigCubit>().sbpHideOnboardingJus();
+          },
+        ),
       ],
       child: widget.child,
     );
@@ -137,6 +147,88 @@ class _SbpPauseDialogJus extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 10),
+                  SbpButtonJus(
+                    isBlack: true,
+                    text: 'Return to map',
+                    onPressed: () {
+                      while (context.canPop()) {
+                        context.pop();
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SbpWinDialogJus extends StatelessWidget {
+  const _SbpWinDialogJus(this.gameConfigCubit);
+  final SbpGameConfigCubit gameConfigCubit;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: Center(
+        child: Stack(
+          children: [
+            Assets.images.sbpDialogJus.image(),
+            Positioned(
+              top: 62,
+              right: 0,
+              left: 0,
+              child: Center(
+                child: Text(
+                  'YOU WIN',
+                  style: context.berlinSans(size: 44),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 170,
+              right: 0,
+              left: 0,
+              child: Center(
+                child: Column(
+                  children: [
+                    Text(
+                      'Your prize:',
+                      style: context.berlinSans(
+                        size: 28,
+                        color: Colors.white,
+                        weight: FontWeight.w100,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Assets.images.sbpCrownJus.image(),
+                        const SizedBox(width: 4),
+                        Text(
+                          gameConfigCubit.state.score.toString(),
+                          style: context.berlinSans(
+                            size: 28,
+                            color: Colors.white,
+                            weight: FontWeight.w100,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 30,
+              right: 45,
+              left: 45,
+              child: Column(
+                children: [
                   SbpButtonJus(
                     isBlack: true,
                     text: 'Return to map',
