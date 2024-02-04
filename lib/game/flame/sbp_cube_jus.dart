@@ -6,7 +6,6 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'sbp_game_jus.dart';
 import 'sbp_level_boundaries_jus.dart';
 import '../../core/assets/gen/assets.gen.dart';
-import 'sbp_target_jus.dart';
 
 class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, CollisionCallbacks {
   SbpCubeJus() : super(priority: 2);
