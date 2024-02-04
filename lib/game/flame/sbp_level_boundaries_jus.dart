@@ -48,6 +48,8 @@ class SbpLevelBoundariesJus extends RectangleComponent
         _level1Hitbox();
       case 1:
         _level2Hitbox();
+      default:
+        _level1Hitbox();
     }
   }
 
@@ -73,6 +75,11 @@ class SbpLevelBoundariesJus extends RectangleComponent
         target.position = Vector2(
           gameRef.size.x / 2 - segment * 3 + half,
           gameRef.size.y / 2 + half,
+        );
+      default:
+        target.position = Vector2(
+          gameRef.size.x / 2 + segment * 3 - half,
+          gameRef.size.y / 2 + segment * 2 - half,
         );
     }
   }
