@@ -1,11 +1,12 @@
 import 'package:e22/game/logic/sbp_cube_bloc_jus.dart';
+import 'package:e22/game/logic/sbp_game_config_cubit.dart';
 import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/assets/gen/assets.gen.dart';
-import '../flame/sbp_flame_game_jus.dart';
+import '../flame/sbp_game_jus.dart';
 import 'sbp_game_helpers_jus.dart';
 import 'sbp_levels_jus.dart';
 
@@ -14,10 +15,11 @@ class SbpGameScreenJus extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    return const PopScope(
+    return PopScope(
       canPop: true,
       child: SbpProviderJus(
-        child: SbpGameListenersJus(
+        index: index,
+        child: const SbpGameListenersJus(
           child: _SbpGameViewJus(),
         ),
       ),
@@ -35,12 +37,14 @@ class _SbpGameViewJus extends StatefulWidget {
 class _SbpGameViewJusState extends State<_SbpGameViewJus> {
   late final Game game;
   late final RLFAppCubitPog appCubit;
-  late final SbpCubeBlocJus bloc;
+  late final SbpGameConfigCubit gameConfigCubit;
+  late final SbpCubeBlocJus cubeBloc;
   @override
   void initState() {
-    bloc = context.read<SbpCubeBlocJus>();
+    cubeBloc = context.read<SbpCubeBlocJus>();
     appCubit = context.read<RLFAppCubitPog>();
-    game = SbpFlameGameJus(bloc, appCubit);
+    gameConfigCubit = context.read<SbpGameConfigCubit>();
+    game = SbpFlameGameJus(cubeBloc, appCubit, gameConfigCubit);
     super.initState();
   }
 
@@ -55,7 +59,7 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
         ),
         const _Level(),
         GameWidget(game: game),
-        _PauseButton(bloc: bloc),
+        _PauseButton(bloc: cubeBloc),
         const _RestartButton(),
       ],
     );
@@ -83,7 +87,12 @@ class _RestartButton extends StatelessWidget {
     return Positioned(
       top: 15,
       right: 15,
-      child: Assets.images.sbpRestartJus.image(),
+      child: GestureDetector(
+        onTap: () {
+          context.read<SbpGameConfigCubit>().sbpRestartJus();
+        },
+        child: Assets.images.sbpRestartJus.image(),
+      ),
     );
   }
 }

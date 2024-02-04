@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:e22/game/logic/sbp_game_config_cubit.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_bloc/flame_bloc.dart';
 
-import 'sbp_flame_game_jus.dart';
+import 'sbp_game_jus.dart';
 import 'sbp_world_jus.dart';
 
 class SbpLevelBoundariesJus extends RectangleComponent
@@ -21,8 +23,21 @@ class SbpLevelBoundariesJus extends RectangleComponent
     paint = Paint()..color = const Color(0x00000000);
     _manageCubeInitialPosition();
     _addingLevelHitBox();
-
+    _blocListener();
     return super.onLoad();
+  }
+
+  void _blocListener() {
+    add(
+      FlameBlocListener<SbpGameConfigCubit, SbpGameConfigState>(
+        bloc: gameRef.gameConfigCubit,
+        listenWhen: (previousState, newState) => previousState.restart == false && newState.restart == true,
+        onNewState: (state) {
+          _manageCubeInitialPosition();
+          gameRef.gameConfigCubit.sbpResetRestartJus();
+        },
+      ),
+    );
   }
 
   void _addingLevelHitBox() {
@@ -32,8 +47,8 @@ class SbpLevelBoundariesJus extends RectangleComponent
   void _manageCubeInitialPosition() {
     final cube = world.cube;
     cube.position = Vector2(
-      gameRef.size.x / 2 - _size / 2 + 23,
-      gameRef.size.y / 2 - _size / 6 + 23,
+      gameRef.size.x / 2 - _size / 2 + 24,
+      gameRef.size.y / 2 - _size / 6 + 24,
     );
   }
 

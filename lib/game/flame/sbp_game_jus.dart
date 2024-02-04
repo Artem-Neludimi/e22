@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:e22/game/logic/sbp_cube_bloc_jus.dart';
+import 'package:e22/game/logic/sbp_game_config_cubit.dart';
 import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -12,8 +13,9 @@ import 'sbp_world_jus.dart';
 
 class SbpFlameGameJus extends FlameGame with HasCollisionDetection, VerticalDragDetector, HorizontalDragDetector {
   final SbpCubeBlocJus cubeBloc;
+  final SbpGameConfigCubit gameConfigCubit;
   final RLFAppCubitPog appCubit;
-  SbpFlameGameJus(this.cubeBloc, this.appCubit) : super(world: SbpWorldJus());
+  SbpFlameGameJus(this.cubeBloc, this.appCubit, this.gameConfigCubit) : super(world: SbpWorldJus());
 
   late final bool isSE;
 

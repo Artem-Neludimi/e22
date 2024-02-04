@@ -3,12 +3,14 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 
-import 'sbp_flame_game_jus.dart';
+import 'sbp_game_jus.dart';
 import 'sbp_level_boundaries_jus.dart';
 import '../../core/assets/gen/assets.gen.dart';
 
 class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, CollisionCallbacks {
   static const double _size = 45;
+  static const double _speed = 300;
+  static const double _speedCompensation = 7;
 
   Vector2 direction = Vector2.zero();
 
@@ -17,9 +19,7 @@ class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, Colli
     sprite = await gameRef.loadSprite(Assets.images.sbpCubeJus.path);
     size = Vector2.all(_size);
     anchor = Anchor.center;
-    add(RectangleHitbox(
-      size: Vector2.all(_size + 5),
-    )..renderShape = false);
+    add(RectangleHitbox()..renderShape = false);
     add(
       FlameBlocListener(
         bloc: gameRef.cubeBloc,
@@ -28,13 +28,13 @@ class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, Colli
             case SbpCubeStopJus():
               direction = Vector2.zero();
             case SbpCubeUpJus():
-              direction.y = -100;
+              direction.y = -_speed;
             case SbpCubeDownJus():
-              direction.y = 100;
+              direction.y = _speed;
             case SbpCubeLeftJus():
-              direction.x = -100;
+              direction.x = -_speed;
             case SbpCubeRightJus():
-              direction.x = 100;
+              direction.x = _speed;
           }
         },
       ),
@@ -49,10 +49,21 @@ class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, Colli
   }
 
   @override
-  void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is SbpLevelBoundariesJus) {
+      final mid = (intersectionPoints.elementAt(0) + intersectionPoints.elementAt(1)) / 2;
+      if (direction.y > 0) {
+        position.y = mid.y - _size / 2 - _speedCompensation;
+      } else if (direction.y < 0) {
+        position.y = mid.y + _size / 2 + _speedCompensation;
+      } else if (direction.x > 0) {
+        position.x = mid.x - _size / 2 - _speedCompensation;
+      } else if (direction.x < 0) {
+        position.x = mid.x + _size / 2 + _speedCompensation;
+      }
       gameRef.cubeBloc.add(const SbpCubeStopEventJus());
     }
-    super.onCollisionStart(intersectionPoints, other);
+
+    super.onCollision(intersectionPoints, other);
   }
 }
