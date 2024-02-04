@@ -1,76 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/game/logic/sbp_game_config_cubit.dart';
+import 'package:e22/presentation/sbp_widgets_jus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../logic/rlf_app_cubit_pog.dart';
-import '../../presentation/sbp_widgets_jus.dart';
+import '../../core/assets/gen/assets.gen.dart';
 import '../logic/sbp_cube_bloc_jus.dart';
-
-class SbpGameListenersJus extends StatelessWidget {
-  const SbpGameListenersJus({
-    super.key,
-    required this.child,
-  });
-
-  final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    // final bloc = context.read<SbpCubeBlocJus>();
-    // final appCubit = context.read<RLFAppCubitPog>();
-    return child;
-    // return MultiBlocListener(
-    //   listeners: const [
-    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
-    //     //   // listenWhen: (previous, current) => current.gameOver,
-    //     //   listener: (context, state) {
-    //     //     showModalBottomSheet(
-    //     //       context: context,
-    //     //       isDismissible: false,
-    //     //       enableDrag: false,
-    //     //       isScrollControlled: false,
-    //     //       builder: (context) => _GameOverBottomSheet(bloc, context.read<RLFAppCubitPog>()),
-    //     //     );
-    //     //   },
-    //     // ),
-    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
-    //     //   // listenWhen: (previous, current) => previous.gameOver && !current.gameOver,
-    //     //   listener: (context, state) {
-    //     //     Navigator.of(context).pop();
-    //     //   },
-    //     // ),
-    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
-    //     //   // listenWhen: (previous, current) => previous.pause != current.pause,
-    //     //   listener: (context, state) {
-    //     //     // if (state.pause) {
-    //     //     showModalBottomSheet(
-    //     //       context: context,
-    //     //       isDismissible: false,
-    //     //       enableDrag: false,
-    //     //       isScrollControlled: false,
-    //     //       builder: (context) => _PauseModalBottomSheet(bloc, context.read<RLFAppCubitPog>()),
-    //     //     );
-    //     //     // } else {
-    //     //     // Navigator.of(context).pop();
-    //     //     // }
-    //     //   },
-    //     // ),
-    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
-    //     //   // listenWhen: (previous, current) => previous.didUseTrampoline == false && current.didUseTrampoline,
-    //     //   listener: (context, state) {
-    //     //     appCubit.useTrampoline();
-    //     //   },
-    //     // ),
-    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
-    //     //   // listenWhen: (previous, current) => previous.didUseScoreMultiplier == false && current.didUseScoreMultiplier,
-    //     //   listener: (context, state) {
-    //     //     appCubit.useScoreMultiplier();
-    //     //   },
-    //     // ),
-    //   ],
-    //   child: child,
-    // );
-  }
-}
 
 class SbpProviderJus extends StatelessWidget {
   const SbpProviderJus({super.key, required this.child, required this.index});
@@ -93,179 +31,107 @@ class SbpProviderJus extends StatelessWidget {
   }
 }
 
-class _PauseModalBottomSheet extends StatelessWidget {
-  final RLFAppCubitPog appCubit;
-  final SbpCubeBlocJus bloc;
-  const _PauseModalBottomSheet(this.bloc, this.appCubit);
+class SbpGameListenersJus extends StatelessWidget {
+  const SbpGameListenersJus({
+    super.key,
+    required this.child,
+  });
 
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    final gameConfigCubit = context.read<SbpGameConfigCubit>();
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<SbpGameConfigCubit, SbpGameConfigState>(
+          listenWhen: (previous, current) => previous.pause == false && current.pause == true,
+          listener: (context, state) async {
+            await showDialog(
+              context: context,
+              builder: (context) => _SbpPauseDialogJus(gameConfigCubit),
+            );
+            context.read<SbpGameConfigCubit>().sbpHidePauseJus();
+          },
+        ),
+      ],
+      child: child,
+    );
+  }
+}
+
+class _SbpPauseDialogJus extends StatelessWidget {
+  const _SbpPauseDialogJus(this.gameConfigCubit);
+  final SbpGameConfigCubit gameConfigCubit;
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(32),
-        decoration: const BoxDecoration(
-          color: Color.fromRGBO(13, 12, 80, 1),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+      child: Center(
+        child: Stack(
           children: [
-            Text(
-              'PAUSE',
-              style: Theme.of(context).textTheme.displayMedium,
+            Assets.images.sbpDialogJus.image(),
+            Positioned(
+              top: 62,
+              right: 0,
+              left: 0,
+              child: Center(
+                child: Text(
+                  'PAUSE',
+                  style: context.berlinSans(size: 44),
+                ),
+              ),
             ),
-            const SizedBox(height: 32),
-            Text(
-              'CURRENT SCORE',
-              style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                    fontSize: 18,
-                    color: Colors.white.withOpacity(0.5),
+            Positioned(
+              top: 170,
+              right: 0,
+              left: 0,
+              child: Center(
+                child: Text(
+                  'Game is\npaused',
+                  textAlign: TextAlign.center,
+                  style: context.berlinSans(
+                    size: 28,
+                    color: Colors.white,
+                    weight: FontWeight.w100,
                   ),
+                ),
+              ),
             ),
-            const SizedBox(height: 24),
-            // Text(
-            // '${bloc.state.score}',
-            // style: Theme.of(context).textTheme.displayMedium,
-            // ),
-            const SizedBox(height: 32),
-            SbpButtonJus(
-              onPressed: () {
-                // appCubit.addScore(bloc.state.score);
-                final navigator = Navigator.of(context);
-                while (navigator.canPop()) {
-                  navigator.pop();
-                }
-              },
-              text: '',
+            Positioned(
+              bottom: 30,
+              right: 45,
+              left: 45,
+              child: Column(
+                children: [
+                  SbpButtonJus(
+                    text: 'Resume',
+                    onPressed: () {
+                      context.pop();
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  SbpButtonJus(
+                    isBlack: true,
+                    text: 'Restart',
+                    onPressed: () {
+                      gameConfigCubit.sbpRestartJus();
+                      context.pop();
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  SbpButtonJus(
+                    isBlack: true,
+                    text: 'Return to map',
+                    onPressed: () {
+                      while (context.canPop()) {
+                        context.pop();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 24),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _GameOverBottomSheet extends StatefulWidget {
-  const _GameOverBottomSheet(this.bloc, this.appCubit);
-  final SbpCubeBlocJus bloc;
-  final RLFAppCubitPog appCubit;
-
-  @override
-  State<_GameOverBottomSheet> createState() => _GameOverBottomSheetState();
-}
-
-class _GameOverBottomSheetState extends State<_GameOverBottomSheet> {
-  @override
-  Widget build(BuildContext context) {
-    final appCubit = context.watch<RLFAppCubitPog>();
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(32),
-        decoration: const BoxDecoration(
-          color: Color.fromRGBO(13, 12, 80, 1),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'RESULTS',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              const SizedBox(height: 32),
-              Text(
-                'YOUR SCORE',
-                style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                      fontSize: 18,
-                      color: Colors.white.withOpacity(0.5),
-                    ),
-              ),
-              const SizedBox(height: 24),
-              // Text(
-              // '${widget.bloc.state.score}',
-              // style: Theme.of(context).textTheme.displayMedium,
-              // ),
-              if (appCubit.state.isGainBonus) ...[
-                const SizedBox(height: 24),
-                SbpButtonJus(
-                  onPressed: () {
-                    // appCubit.addScore(widget.bloc.state.score);
-                    final navigator = Navigator.of(context);
-                    while (navigator.canPop()) {
-                      navigator.pop();
-                    }
-                  },
-                  text: '',
-                ),
-                const SizedBox(height: 24),
-              ] else ...[
-                Divider(
-                  height: 48,
-                  color: Colors.white.withOpacity(0.2),
-                ),
-                Text(
-                  'CHOSE YOUR BONUS',
-                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                        fontSize: 18,
-                        color: Colors.white.withOpacity(0.5),
-                      ),
-                ),
-                const SizedBox(height: 16),
-                const Row(
-                  children: [
-                    _Bonus(),
-                    _Bonus(),
-                    _Bonus(),
-                  ],
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Bonus extends StatefulWidget {
-  const _Bonus();
-
-  @override
-  State<_Bonus> createState() => _BonusState();
-}
-
-class _BonusState extends State<_Bonus> {
-  bool _isPick = false;
-  @override
-  Widget build(BuildContext context) {
-    final appCubit = context.watch<RLFAppCubitPog>();
-    return Expanded(
-      child: GestureDetector(
-        onTap: () async {
-          setState(() => _isPick = !_isPick);
-          await Future.delayed(const Duration(milliseconds: 300));
-          appCubit.setGainBonus();
-        },
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: _isPick
-              ? Column(
-                  children: [
-                    const SizedBox.shrink(),
-                    Text(
-                      '1000',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                    ),
-                  ],
-                )
-              : const SizedBox.shrink(),
         ),
       ),
     );

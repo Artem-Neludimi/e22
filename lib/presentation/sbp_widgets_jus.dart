@@ -82,9 +82,11 @@ class SbpButtonJus extends StatefulWidget {
   const SbpButtonJus({
     super.key,
     this.onPressed,
+    this.isBlack = false,
     required this.text,
   });
   final VoidCallback? onPressed;
+  final bool isBlack;
   final String text;
 
   @override
@@ -112,12 +114,15 @@ class _SbpButtonJusState extends State<SbpButtonJus> {
         duration: const Duration(milliseconds: 100),
         child: Container(
           height: context.isSE ? 50 : 60,
-          decoration: const BoxDecoration(
-            gradient: SweepGradient(
-              center: Alignment.bottomLeft,
-              colors: _sbpGradientColorsJus,
-            ),
-            border: GradientBoxBorder(
+          decoration: BoxDecoration(
+            color: widget.isBlack ? const Color.fromARGB(255, 30, 30, 30) : null,
+            gradient: widget.isBlack
+                ? null
+                : const SweepGradient(
+                    center: Alignment.bottomLeft,
+                    colors: _sbpGradientColorsJus,
+                  ),
+            border: const GradientBoxBorder(
               width: 2,
               gradient: LinearGradient(
                 begin: Alignment.topCenter,

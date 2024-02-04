@@ -59,7 +59,7 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
         ),
         const _Level(),
         GameWidget(game: game),
-        _PauseButton(bloc: cubeBloc),
+        const _PauseButton(),
         const _RestartButton(),
       ],
     );
@@ -98,11 +98,7 @@ class _RestartButton extends StatelessWidget {
 }
 
 class _PauseButton extends StatelessWidget {
-  const _PauseButton({
-    required this.bloc,
-  });
-
-  final SbpCubeBlocJus bloc;
+  const _PauseButton();
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +107,7 @@ class _PauseButton extends StatelessWidget {
       left: 15,
       child: GestureDetector(
         onTap: () {
-          // bloc.add(const RLFGamePausePOG());
+          context.read<SbpGameConfigCubit>().sbpShowPauseJus();
         },
         child: Assets.images.sbpPauseJus.image(),
       ),
