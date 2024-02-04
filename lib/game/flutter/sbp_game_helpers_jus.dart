@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/rlf_app_cubit_pog.dart';
 import '../../presentation/sbp_widgets_jus.dart';
-import '../logic/rlf_game_bloc_pog.dart';
+import '../logic/sbp_cube_bloc_jus.dart';
 
 class SbpGameListenersJus extends StatelessWidget {
   const SbpGameListenersJus({
@@ -14,60 +14,60 @@ class SbpGameListenersJus extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<RLFGameBlocPOG>();
-    final appCubit = context.read<RLFAppCubitPog>();
-
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<RLFGameBlocPOG, RLFGameStatePOG>(
-          listenWhen: (previous, current) => current.gameOver,
-          listener: (context, state) {
-            showModalBottomSheet(
-              context: context,
-              isDismissible: false,
-              enableDrag: false,
-              isScrollControlled: false,
-              builder: (context) => _GameOverBottomSheet(bloc, context.read<RLFAppCubitPog>()),
-            );
-          },
-        ),
-        BlocListener<RLFGameBlocPOG, RLFGameStatePOG>(
-          listenWhen: (previous, current) => previous.gameOver && !current.gameOver,
-          listener: (context, state) {
-            Navigator.of(context).pop();
-          },
-        ),
-        BlocListener<RLFGameBlocPOG, RLFGameStatePOG>(
-          listenWhen: (previous, current) => previous.pause != current.pause,
-          listener: (context, state) {
-            if (state.pause) {
-              showModalBottomSheet(
-                context: context,
-                isDismissible: false,
-                enableDrag: false,
-                isScrollControlled: false,
-                builder: (context) => _PauseModalBottomSheet(bloc, context.read<RLFAppCubitPog>()),
-              );
-            } else {
-              Navigator.of(context).pop();
-            }
-          },
-        ),
-        BlocListener<RLFGameBlocPOG, RLFGameStatePOG>(
-          listenWhen: (previous, current) => previous.didUseTrampoline == false && current.didUseTrampoline,
-          listener: (context, state) {
-            appCubit.useTrampoline();
-          },
-        ),
-        BlocListener<RLFGameBlocPOG, RLFGameStatePOG>(
-          listenWhen: (previous, current) => previous.didUseScoreMultiplier == false && current.didUseScoreMultiplier,
-          listener: (context, state) {
-            appCubit.useScoreMultiplier();
-          },
-        ),
-      ],
-      child: child,
-    );
+    // final bloc = context.read<SbpCubeBlocJus>();
+    // final appCubit = context.read<RLFAppCubitPog>();
+    return child;
+    // return MultiBlocListener(
+    //   listeners: const [
+    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
+    //     //   // listenWhen: (previous, current) => current.gameOver,
+    //     //   listener: (context, state) {
+    //     //     showModalBottomSheet(
+    //     //       context: context,
+    //     //       isDismissible: false,
+    //     //       enableDrag: false,
+    //     //       isScrollControlled: false,
+    //     //       builder: (context) => _GameOverBottomSheet(bloc, context.read<RLFAppCubitPog>()),
+    //     //     );
+    //     //   },
+    //     // ),
+    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
+    //     //   // listenWhen: (previous, current) => previous.gameOver && !current.gameOver,
+    //     //   listener: (context, state) {
+    //     //     Navigator.of(context).pop();
+    //     //   },
+    //     // ),
+    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
+    //     //   // listenWhen: (previous, current) => previous.pause != current.pause,
+    //     //   listener: (context, state) {
+    //     //     // if (state.pause) {
+    //     //     showModalBottomSheet(
+    //     //       context: context,
+    //     //       isDismissible: false,
+    //     //       enableDrag: false,
+    //     //       isScrollControlled: false,
+    //     //       builder: (context) => _PauseModalBottomSheet(bloc, context.read<RLFAppCubitPog>()),
+    //     //     );
+    //     //     // } else {
+    //     //     // Navigator.of(context).pop();
+    //     //     // }
+    //     //   },
+    //     // ),
+    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
+    //     //   // listenWhen: (previous, current) => previous.didUseTrampoline == false && current.didUseTrampoline,
+    //     //   listener: (context, state) {
+    //     //     appCubit.useTrampoline();
+    //     //   },
+    //     // ),
+    //     // BlocListener<SbpCubeBlocJus, SbpCubeStateJus>(
+    //     //   // listenWhen: (previous, current) => previous.didUseScoreMultiplier == false && current.didUseScoreMultiplier,
+    //     //   listener: (context, state) {
+    //     //     appCubit.useScoreMultiplier();
+    //     //   },
+    //     // ),
+    //   ],
+    //   child: child,
+    // );
   }
 }
 
@@ -78,7 +78,7 @@ class SbpProviderJus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RLFGameBlocPOG(),
+      create: (context) => SbpCubeBlocJus(),
       child: child,
     );
   }
@@ -86,7 +86,7 @@ class SbpProviderJus extends StatelessWidget {
 
 class _PauseModalBottomSheet extends StatelessWidget {
   final RLFAppCubitPog appCubit;
-  final RLFGameBlocPOG bloc;
+  final SbpCubeBlocJus bloc;
   const _PauseModalBottomSheet(this.bloc, this.appCubit);
 
   @override
@@ -115,14 +115,14 @@ class _PauseModalBottomSheet extends StatelessWidget {
                   ),
             ),
             const SizedBox(height: 24),
-            Text(
-              '${bloc.state.score}',
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
+            // Text(
+            // '${bloc.state.score}',
+            // style: Theme.of(context).textTheme.displayMedium,
+            // ),
             const SizedBox(height: 32),
             SbpButtonJus(
               onPressed: () {
-                appCubit.addScore(bloc.state.score);
+                // appCubit.addScore(bloc.state.score);
                 final navigator = Navigator.of(context);
                 while (navigator.canPop()) {
                   navigator.pop();
@@ -140,7 +140,7 @@ class _PauseModalBottomSheet extends StatelessWidget {
 
 class _GameOverBottomSheet extends StatefulWidget {
   const _GameOverBottomSheet(this.bloc, this.appCubit);
-  final RLFGameBlocPOG bloc;
+  final SbpCubeBlocJus bloc;
   final RLFAppCubitPog appCubit;
 
   @override
@@ -176,15 +176,15 @@ class _GameOverBottomSheetState extends State<_GameOverBottomSheet> {
                     ),
               ),
               const SizedBox(height: 24),
-              Text(
-                '${widget.bloc.state.score}',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
+              // Text(
+              // '${widget.bloc.state.score}',
+              // style: Theme.of(context).textTheme.displayMedium,
+              // ),
               if (appCubit.state.isGainBonus) ...[
                 const SizedBox(height: 24),
                 SbpButtonJus(
                   onPressed: () {
-                    appCubit.addScore(widget.bloc.state.score);
+                    // appCubit.addScore(widget.bloc.state.score);
                     final navigator = Navigator.of(context);
                     while (navigator.canPop()) {
                       navigator.pop();

@@ -1,4 +1,4 @@
-import 'package:e22/game/logic/rlf_game_bloc_pog.dart';
+import 'package:e22/game/logic/sbp_cube_bloc_jus.dart';
 import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +35,10 @@ class _SbpGameViewJus extends StatefulWidget {
 class _SbpGameViewJusState extends State<_SbpGameViewJus> {
   late final Game game;
   late final RLFAppCubitPog appCubit;
-  late final RLFGameBlocPOG bloc;
+  late final SbpCubeBlocJus bloc;
   @override
   void initState() {
-    bloc = context.read<RLFGameBlocPOG>();
+    bloc = context.read<SbpCubeBlocJus>();
     appCubit = context.read<RLFAppCubitPog>();
     game = SbpFlameGameJus(bloc, appCubit);
     super.initState();
@@ -93,7 +93,7 @@ class _PauseButton extends StatelessWidget {
     required this.bloc,
   });
 
-  final RLFGameBlocPOG bloc;
+  final SbpCubeBlocJus bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class _PauseButton extends StatelessWidget {
       left: 15,
       child: GestureDetector(
         onTap: () {
-          bloc.add(const RLFGamePausePOG());
+          // bloc.add(const RLFGamePausePOG());
         },
         child: Assets.images.sbpPauseJus.image(),
       ),

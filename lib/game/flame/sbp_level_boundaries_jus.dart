@@ -10,6 +10,7 @@ import 'sbp_world_jus.dart';
 class SbpLevelBoundariesJus extends RectangleComponent
     with HasGameRef<SbpFlameGameJus>, HasWorldReference<SbpWorldJus> {
   static const double _size = 270;
+  static const double _boundarySize = 1;
   @override
   FutureOr<void> onLoad() {
     position = Vector2(
@@ -31,14 +32,14 @@ class SbpLevelBoundariesJus extends RectangleComponent
   void _manageCubeInitialPosition() {
     final cube = world.cube;
     cube.position = Vector2(
-      gameRef.size.x / 2 - _size / 2,
-      gameRef.size.y / 2 - _size / 6 + 1.5,
+      gameRef.size.x / 2 - _size / 2 + 23,
+      gameRef.size.y / 2 - _size / 6 + 23,
     );
   }
 
   void _level2Hitbox() {
     final paint = Paint()
-      ..color = const Color(0x00000000)
+      ..color = const Color.fromRGBO(185, 144, 87, 1)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3;
     const segment = _size / 6;
@@ -51,7 +52,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
         ),
         size: Vector2(
           segment * 2,
-          1,
+          _boundarySize,
         ),
       )
         ..paint = paint
@@ -62,7 +63,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
           segment * 2,
         ),
         size: Vector2(
-          1,
+          _boundarySize,
           segment,
         ),
       )
@@ -75,7 +76,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
         ),
         size: Vector2(
           segment * 4,
-          1,
+          _boundarySize,
         ),
       )
         ..paint = paint
@@ -86,7 +87,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
           segment * 3,
         ),
         size: Vector2(
-          1,
+          _boundarySize,
           segment * 2,
         ),
       )
@@ -99,7 +100,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
         ),
         size: Vector2(
           segment * 6,
-          1,
+          _boundarySize,
         ),
       )
         ..paint = paint
@@ -110,7 +111,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
           segment * 2,
         ),
         size: Vector2(
-          1,
+          _boundarySize,
           segment * 3,
         ),
       )

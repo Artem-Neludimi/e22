@@ -30,25 +30,6 @@ class _SbpLevelPainterJus extends CustomPainter {
   bool shouldRepaint(_SbpLevelPainterJus oldDelegate) => false;
 }
 
-class _SbpLevelBorderPainterJus extends CustomPainter {
-  const _SbpLevelBorderPainterJus(this.color);
-  final Color color;
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3;
-
-    final path = _sbpLevel1PathJus(size);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_SbpLevelBorderPainterJus oldDelegate) => false;
-}
-
 class SbpLevel1ClipperJus extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -65,32 +46,18 @@ class SbpLevel1WidgetJus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        SizedBox(
-          height: 270,
-          width: 270,
-          child: ClipPath(
-            clipper: SbpLevel1ClipperJus(),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: CustomPaint(
-                painter: _SbpLevelPainterJus(),
-              ),
-            ),
-          ),
-        ),
-        const Positioned(
-          top: -1.5,
-          bottom: -1.5,
-          left: -1.5,
-          right: -1.5,
+    return SizedBox(
+      height: 270,
+      width: 270,
+      child: ClipPath(
+        clipper: SbpLevel1ClipperJus(),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: CustomPaint(
-            painter: _SbpLevelBorderPainterJus(Color.fromRGBO(185, 144, 87, 1)),
+            painter: _SbpLevelPainterJus(),
           ),
         ),
-      ],
+      ),
     );
   }
 }
