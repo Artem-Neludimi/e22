@@ -45,7 +45,7 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
     cubeBloc = context.read<SbpCubeBlocJus>();
     appCubit = context.read<RLFAppCubitPog>();
     gameConfigCubit = context.read<SbpGameConfigCubit>();
-    game = SbpFlameGameJus(cubeBloc, appCubit, gameConfigCubit);
+    game = SbpFlameGameJus(cubeBloc, appCubit, gameConfigCubit, widget.level);
     if (widget.level == 0) gameConfigCubit.sbpShowOnboardingJus();
     super.initState();
   }
@@ -59,7 +59,7 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
           height: double.infinity,
           fit: BoxFit.cover,
         ),
-        const _Level(),
+        _Level(widget.level),
         GameWidget(game: game),
         const _PauseButton(),
         const _RestartButton(),
@@ -69,13 +69,14 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
 }
 
 class _Level extends StatelessWidget {
-  const _Level();
+  const _Level(this.index);
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return const Positioned.fill(
+    return Positioned.fill(
       child: Center(
-        child: SbpLevel1WidgetJus(),
+        child: SbpLevel1WidgetJus(index: index),
       ),
     );
   }

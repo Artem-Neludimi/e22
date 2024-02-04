@@ -6,6 +6,15 @@ Path _sbpLevel1PathJus(Size size) {
   final segment = size.width / 6;
   return Path()
     ..moveTo(0, segment * 2)
+    ..lineTo(segment * 6, segment * 2)
+    ..lineTo(segment * 6, segment * 5)
+    ..lineTo(0, segment * 5);
+}
+
+Path _sbpLevel2PathJus(Size size) {
+  final segment = size.width / 6;
+  return Path()
+    ..moveTo(0, segment * 2)
     ..lineTo(segment * 2, segment * 2)
     ..lineTo(segment * 2, segment * 3)
     ..lineTo(segment * 6, segment * 3)
@@ -15,13 +24,18 @@ Path _sbpLevel1PathJus(Size size) {
 }
 
 class _SbpLevelPainterJus extends CustomPainter {
+  const _SbpLevelPainterJus({required this.index});
+  final int index;
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = const Color.fromARGB(126, 128, 83, 38)
       ..style = PaintingStyle.fill;
 
-    final path = _sbpLevel1PathJus(size);
+    final path = switch (index) {
+      0 => _sbpLevel1PathJus(size),
+      _ => _sbpLevel2PathJus(size),
+    };
 
     canvas.drawPath(path, paint);
   }
@@ -30,19 +44,26 @@ class _SbpLevelPainterJus extends CustomPainter {
   bool shouldRepaint(_SbpLevelPainterJus oldDelegate) => false;
 }
 
-class SbpLevel1ClipperJus extends CustomClipper<Path> {
+class _SbpLevel1ClipperJus extends CustomClipper<Path> {
+  const _SbpLevel1ClipperJus({required this.index});
+  final int index;
   @override
   Path getClip(Size size) {
-    final path = _sbpLevel1PathJus(size);
+    final path = switch (index) {
+      0 => _sbpLevel1PathJus(size),
+      _ => _sbpLevel2PathJus(size),
+    };
+
     return path;
   }
 
   @override
-  bool shouldReclip(SbpLevel1ClipperJus oldClipper) => false;
+  bool shouldReclip(_SbpLevel1ClipperJus oldClipper) => false;
 }
 
 class SbpLevel1WidgetJus extends StatelessWidget {
-  const SbpLevel1WidgetJus({super.key});
+  const SbpLevel1WidgetJus({super.key, required this.index});
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +71,11 @@ class SbpLevel1WidgetJus extends StatelessWidget {
       height: 270,
       width: 270,
       child: ClipPath(
-        clipper: SbpLevel1ClipperJus(),
+        clipper: _SbpLevel1ClipperJus(index: index),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: CustomPaint(
-            painter: _SbpLevelPainterJus(),
+            painter: _SbpLevelPainterJus(index: index),
           ),
         ),
       ),

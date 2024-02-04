@@ -15,7 +15,8 @@ class SbpFlameGameJus extends FlameGame with HasCollisionDetection, VerticalDrag
   final SbpCubeBlocJus cubeBloc;
   final SbpGameConfigCubit gameConfigCubit;
   final RLFAppCubitPog appCubit;
-  SbpFlameGameJus(this.cubeBloc, this.appCubit, this.gameConfigCubit) : super(world: SbpWorldJus());
+  final int level;
+  SbpFlameGameJus(this.cubeBloc, this.appCubit, this.gameConfigCubit, this.level) : super(world: SbpWorldJus());
 
   late final bool isSE;
 
