@@ -48,15 +48,29 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Assets.images.sbpGameBgJus.image(
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
+        const _Level(),
         GameWidget(game: game),
         _PauseButton(bloc: bloc),
         const _RestartButton(),
-        const Positioned.fill(
-          child: Center(
-            child: SbpLevel1WidgetJus(),
-          ),
-        ),
       ],
+    );
+  }
+}
+
+class _Level extends StatelessWidget {
+  const _Level();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Positioned.fill(
+      child: Center(
+        child: SbpLevel1WidgetJus(),
+      ),
     );
   }
 }

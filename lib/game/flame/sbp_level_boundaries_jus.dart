@@ -5,8 +5,10 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 import 'sbp_flame_game_jus.dart';
+import 'sbp_world_jus.dart';
 
-class SbpLevelBoundariesJus extends RectangleComponent with HasGameRef<SbpFlameGameJus> {
+class SbpLevelBoundariesJus extends RectangleComponent
+    with HasGameRef<SbpFlameGameJus>, HasWorldReference<SbpWorldJus> {
   static const double _size = 270;
   @override
   FutureOr<void> onLoad() {
@@ -16,7 +18,7 @@ class SbpLevelBoundariesJus extends RectangleComponent with HasGameRef<SbpFlameG
     );
     size = Vector2.all(_size);
     paint = Paint()..color = const Color(0x00000000);
-
+    _manageCubeInitialPosition();
     _addingLevelHitBox();
 
     return super.onLoad();
@@ -26,7 +28,15 @@ class SbpLevelBoundariesJus extends RectangleComponent with HasGameRef<SbpFlameG
     _level2Hitbox();
   }
 
-  _level2Hitbox() {
+  void _manageCubeInitialPosition() {
+    final cube = world.cube;
+    cube.position = Vector2(
+      gameRef.size.x / 2 - _size / 2,
+      gameRef.size.y / 2 - _size / 6 + 1.5,
+    );
+  }
+
+  void _level2Hitbox() {
     final paint = Paint()
       ..color = const Color(0x00000000)
       ..style = PaintingStyle.stroke
