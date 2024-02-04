@@ -15,7 +15,7 @@ class SbpGameScreenJus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const PopScope(
-      canPop: false,
+      canPop: true,
       child: SbpProviderJus(
         child: SbpGameListenersJus(
           child: _SbpGameViewJus(),
@@ -56,15 +56,6 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
             child: SbpLevel1WidgetJus(),
           ),
         ),
-        // const Positioned(
-        //   width: 45,
-        //   height: 45,
-        //   bottom: 350,
-        //   right: 100,
-        //   child: ColoredBox(
-        //     color: Colors.black,
-        //   ),
-        // )
       ],
     );
   }

@@ -5,13 +5,13 @@ import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 
-import 'rlf_world_pog.dart';
+import 'sbp_world_jus.dart';
 import 'sbp_background_jus.dart';
 
 class SbpFlameGameJus extends FlameGame with HasCollisionDetection {
   final RLFGameBlocPOG bloc;
   final RLFAppCubitPog appCubit;
-  SbpFlameGameJus(this.bloc, this.appCubit) : super(world: RLFWorldPog());
+  SbpFlameGameJus(this.bloc, this.appCubit) : super(world: SbpWorldJus());
 
   late final bool isSE;
 
