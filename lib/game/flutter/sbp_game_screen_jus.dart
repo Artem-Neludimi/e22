@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/assets/gen/assets.gen.dart';
 import '../flame/sbp_flame_game_jus.dart';
 import 'sbp_game_helpers_jus.dart';
+import 'sbp_levels_jus.dart';
 
 class SbpGameScreenJus extends StatelessWidget {
   const SbpGameScreenJus({super.key, required this.index});
@@ -50,6 +51,20 @@ class _SbpGameViewJusState extends State<_SbpGameViewJus> {
         GameWidget(game: game),
         _PauseButton(bloc: bloc),
         const _RestartButton(),
+        const Positioned.fill(
+          child: Center(
+            child: SbpLevel1WidgetJus(),
+          ),
+        ),
+        // const Positioned(
+        //   width: 45,
+        //   height: 45,
+        //   bottom: 350,
+        //   right: 100,
+        //   child: ColoredBox(
+        //     color: Colors.black,
+        //   ),
+        // )
       ],
     );
   }
