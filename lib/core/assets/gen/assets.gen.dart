@@ -67,6 +67,14 @@ class $AssetsImagesGen {
   AssetGenImage get sbpTargetJus =>
       const AssetGenImage('assets/images/sbp_target_jus.png');
 
+  /// File path: assets/images/sbp_tasks_bg_jus.png
+  AssetGenImage get sbpTasksBgJus =>
+      const AssetGenImage('assets/images/sbp_tasks_bg_jus.png');
+
+  /// File path: assets/images/sbp_tasks_jus.png
+  AssetGenImage get sbpTasksJus =>
+      const AssetGenImage('assets/images/sbp_tasks_jus.png');
+
   /// File path: assets/images/sbp_terms_of_use_bg_jus.png
   AssetGenImage get sbpTermsOfUseBgJus =>
       const AssetGenImage('assets/images/sbp_terms_of_use_bg_jus.png');
@@ -86,6 +94,8 @@ class $AssetsImagesGen {
         sbpRestartJus,
         sbpSplashBgJus,
         sbpTargetJus,
+        sbpTasksBgJus,
+        sbpTasksJus,
         sbpTermsOfUseBgJus
       ];
 }

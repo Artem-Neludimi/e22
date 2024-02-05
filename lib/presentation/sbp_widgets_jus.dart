@@ -5,11 +5,9 @@ import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:e22/presentation/sbp_settings_jus.dart';
 import 'package:e22/presentation/sbp_shop_jus.dart';
 import 'package:e22/presentation/sbp_tasks_jus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 import 'sbp_menu_jus.dart';
