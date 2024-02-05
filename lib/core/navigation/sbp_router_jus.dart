@@ -7,6 +7,9 @@ import 'package:go_router/go_router.dart';
 import '../../game/flutter/sbp_game_screen_jus.dart';
 import '../../presentation/sbp_menu_jus.dart';
 import '../../presentation/sbp_onboarding_jus.dart';
+import '../../presentation/sbp_settings_jus.dart';
+import '../../presentation/sbp_shop_jus.dart';
+import '../../presentation/sbp_tasks_jus.dart';
 import '../../presentation/sbp_terms_of_use_jus.dart';
 
 final _routerKey = GlobalKey<NavigatorState>();
@@ -35,23 +38,31 @@ final GoRouter sbpRouterJus = GoRouter(
     ShellRoute(
       parentNavigatorKey: _routerKey,
       navigatorKey: _menuKey,
-      builder: (context, state, child) => child,
+      pageBuilder: (context, state, child) => NoTransitionPage(child: child),
       routes: [
         GoRoute(
           path: SbpRoutesJus.menu.path,
-          builder: (context, state) => const SbpMenuJus(bottomNavigationBar: _menuBottomNavigationBar),
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: SbpMenuJus(bottomNavigationBar: _menuBottomNavigationBar),
+          ),
         ),
         GoRoute(
           path: SbpRoutesJus.tasks.path,
-          builder: (context, state) => const Scaffold(bottomNavigationBar: _menuBottomNavigationBar),
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: SbpTasksJus(bottomNavigationBar: _menuBottomNavigationBar),
+          ),
         ),
         GoRoute(
           path: SbpRoutesJus.shop.path,
-          builder: (context, state) => const Scaffold(bottomNavigationBar: _menuBottomNavigationBar),
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: SbpShopJus(bottomNavigationBar: _menuBottomNavigationBar),
+          ),
         ),
         GoRoute(
           path: SbpRoutesJus.settings.path,
-          builder: (context, state) => const Scaffold(bottomNavigationBar: _menuBottomNavigationBar),
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: SbpSettingsJus(bottomNavigationBar: _menuBottomNavigationBar),
+          ),
         ),
       ],
     ),

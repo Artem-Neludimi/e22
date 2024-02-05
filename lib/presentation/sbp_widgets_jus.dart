@@ -1,14 +1,17 @@
 import 'dart:ui';
 
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
+import 'package:e22/core/navigation/sbp_router_jus.dart';
+import 'package:e22/presentation/sbp_settings_jus.dart';
+import 'package:e22/presentation/sbp_shop_jus.dart';
+import 'package:e22/presentation/sbp_tasks_jus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
-import 'rlf_settings_pog.dart';
-import 'rlf_shop_pog.dart';
 import 'sbp_menu_jus.dart';
 
 class SbpBottomNavigationBarJus extends StatelessWidget {
@@ -19,8 +22,9 @@ class SbpBottomNavigationBarJus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMenu = context.findAncestorWidgetOfExactType<SbpMenuJus>() != null;
-    final isShop = context.findAncestorWidgetOfExactType<RLFShopPog>() != null;
-    final isSettings = context.findAncestorWidgetOfExactType<RLFSettingsPog>() != null;
+    final isTasks = context.findAncestorWidgetOfExactType<SbpTasksJus>() != null;
+    final isShop = context.findAncestorWidgetOfExactType<SbpShopJus>() != null;
+    final isSettings = context.findAncestorWidgetOfExactType<SbpSettingsJus>() != null;
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(22),
@@ -34,7 +38,17 @@ class SbpBottomNavigationBarJus extends StatelessWidget {
           ),
         ),
         child: BottomNavigationBar(
-          onTap: (value) {},
+          onTap: (value) {
+            if (value == 0) {
+              SbpRoutesJus.menu.go(context);
+            } else if (value == 1) {
+              SbpRoutesJus.tasks.go(context);
+            } else if (value == 2) {
+              SbpRoutesJus.shop.go(context);
+            } else if (value == 3) {
+              SbpRoutesJus.settings.go(context);
+            }
+          },
           backgroundColor: Colors.transparent,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.white,
@@ -44,11 +58,13 @@ class SbpBottomNavigationBarJus extends StatelessWidget {
           showUnselectedLabels: true,
           currentIndex: isMenu
               ? 0
-              : isShop
+              : isTasks
                   ? 1
-                  : isSettings
+                  : isShop
                       ? 2
-                      : 0,
+                      : isSettings
+                          ? 3
+                          : 0,
           elevation: 0,
           items: [
             BottomNavigationBarItem(
