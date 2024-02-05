@@ -10,33 +10,32 @@ class SbpTasksJus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SbpAppBarJus(),
-      bottomNavigationBar: bottomNavigationBar,
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: Assets.images.sbpTasksBgJus.provider(),
-            fit: BoxFit.cover,
+    return Stack(
+      children: [
+        Assets.images.sbpTasksBgJus.image(
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          appBar: SbpAppBarJus(),
+          bottomNavigationBar: bottomNavigationBar,
+          body: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Completed tasks: 0/5',
+                  style: context.sourceSans(size: 33),
+                ),
+                const SizedBox(height: 16),
+                Assets.images.sbpTasksJus.image()
+              ],
+            ),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Completed tasks: 0/5',
-                style: context.sourceSans(size: 33),
-              ),
-              const SizedBox(height: 16),
-              Assets.images.sbpTasksJus.image()
-            ],
-          ),
-        ),
-      ),
+      ],
     );
   }
 }

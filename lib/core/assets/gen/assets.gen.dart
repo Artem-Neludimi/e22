@@ -55,9 +55,17 @@ class $AssetsImagesGen {
   AssetGenImage get sbpPauseJus =>
       const AssetGenImage('assets/images/sbp_pause_jus.png');
 
+  /// File path: assets/images/sbp_rate_jus.png
+  AssetGenImage get sbpRateJus =>
+      const AssetGenImage('assets/images/sbp_rate_jus.png');
+
   /// File path: assets/images/sbp_restart_jus.png
   AssetGenImage get sbpRestartJus =>
       const AssetGenImage('assets/images/sbp_restart_jus.png');
+
+  /// File path: assets/images/sbp_share_jus.png
+  AssetGenImage get sbpShareJus =>
+      const AssetGenImage('assets/images/sbp_share_jus.png');
 
   /// File path: assets/images/sbp_splash_bg_jus.png
   AssetGenImage get sbpSplashBgJus =>
@@ -91,7 +99,9 @@ class $AssetsImagesGen {
         sbpOnboardingBg2Jus,
         sbpOnboardingBg3Jus,
         sbpPauseJus,
+        sbpRateJus,
         sbpRestartJus,
+        sbpShareJus,
         sbpSplashBgJus,
         sbpTargetJus,
         sbpTasksBgJus,

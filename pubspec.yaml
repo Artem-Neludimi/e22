@@ -59,3 +59,6 @@ flutter:
     - family: SourceSans
       fonts:
         - asset: assets/fonts/SourceSansPro-Regular.otf
+    - family: SourceCode
+      fonts:
+        - asset: assets/fonts/SourceCodePro-Regular.ttf

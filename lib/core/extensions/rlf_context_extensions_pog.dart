@@ -29,7 +29,7 @@ extension RlfContextExtensionsPog on BuildContext {
   }
 
   TextStyle sourceSans({
-    double size = 20,
+    double size = 22,
     Color color = Colors.white,
     FontWeight weight = FontWeight.normal,
   }) {
@@ -50,6 +50,20 @@ extension RlfContextExtensionsPog on BuildContext {
     if (isSE) size = size * 0.8;
     return TextStyle(
       fontFamily: 'BerlinSans',
+      fontSize: size,
+      color: color,
+      fontWeight: weight,
+    );
+  }
+
+  TextStyle sourceCode({
+    double size = 22,
+    Color color = Colors.white,
+    FontWeight weight = FontWeight.bold,
+  }) {
+    if (isSE) size = size * 0.8;
+    return TextStyle(
+      fontFamily: 'SourceCode',
       fontSize: size,
       color: color,
       fontWeight: weight,
