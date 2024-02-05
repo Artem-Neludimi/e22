@@ -16,7 +16,7 @@ class SbpGameScreenJus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: true,
       child: SbpProviderJus(
         index: index,
         child: SbpGameListenersJus(

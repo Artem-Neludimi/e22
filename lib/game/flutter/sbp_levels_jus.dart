@@ -23,6 +23,19 @@ Path _sbpLevel2PathJus(Size size) {
     ..lineTo(0, segment * 2 - 1.5);
 }
 
+Path _sbpLevel3PathJus(Size size) {
+  final segment = size.width / 6;
+  return Path()
+    ..moveTo(0, 0)
+    ..lineTo(segment * 6, 0)
+    ..lineTo(segment * 6, segment * 3)
+    ..lineTo(segment * 6, segment * 4)
+    ..lineTo(segment * 4, segment * 4)
+    ..lineTo(segment * 4, segment * 6)
+    ..lineTo(0, segment * 6)
+    ..lineTo(0, 0);
+}
+
 class _SbpLevelPainterJus extends CustomPainter {
   const _SbpLevelPainterJus({required this.index});
   final int index;
@@ -34,7 +47,8 @@ class _SbpLevelPainterJus extends CustomPainter {
 
     final path = switch (index) {
       0 => _sbpLevel1PathJus(size),
-      _ => _sbpLevel2PathJus(size),
+      1 => _sbpLevel2PathJus(size),
+      _ => _sbpLevel3PathJus(size),
     };
 
     canvas.drawPath(path, paint);
@@ -51,7 +65,8 @@ class _SbpLevel1ClipperJus extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = switch (index) {
       0 => _sbpLevel1PathJus(size),
-      _ => _sbpLevel2PathJus(size),
+      1 => _sbpLevel2PathJus(size),
+      _ => _sbpLevel3PathJus(size),
     };
 
     return path;

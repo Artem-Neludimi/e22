@@ -49,27 +49,28 @@ class SbpLevelBoundariesJus extends RectangleComponent
       case 1:
         _level2Hitbox();
       default:
-        _level2Hitbox();
+        _level3Hitbox();
     }
   }
 
   void _manageCubeInitialPosition() {
     final cube = world.cube;
+    const half = 24.5;
     switch (gameRef.level) {
       case 0:
         cube.position = Vector2(
-          gameRef.size.x / 2 - _size / 2 + 24,
-          gameRef.size.y / 2 - _size / 6 + 24,
+          gameRef.size.x / 2 - _size / 2 + half,
+          gameRef.size.y / 2 - _size / 6 + half,
         );
       case 1:
         cube.position = Vector2(
-          gameRef.size.x / 2 - _size / 2 + 24,
-          gameRef.size.y / 2 - _size / 6 + 24,
+          gameRef.size.x / 2 - _size / 2 + half,
+          gameRef.size.y / 2 - _size / 6 + half,
         );
       default:
         cube.position = Vector2(
-          gameRef.size.x / 2 - _size / 2 + 24,
-          gameRef.size.y / 2 - _size / 6 + 24,
+          gameRef.size.x / 2 - _size / 2 + half,
+          gameRef.size.y / 2 + _size / 4,
         );
     }
   }
@@ -92,7 +93,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
       default:
         target.position = Vector2(
           gameRef.size.x / 2 - segment * 3 + half,
-          gameRef.size.y / 2 + half,
+          gameRef.size.y / 2 + segment * 1 - half,
         );
     }
   }
@@ -232,6 +233,89 @@ class SbpLevelBoundariesJus extends RectangleComponent
         size: Vector2(
           _boundarySize,
           segment * 3,
+        ),
+      )
+        ..paint = paint
+        ..renderShape = true,
+    ]);
+  }
+
+  void _level3Hitbox() {
+    final paint = Paint()
+      ..color = const Color.fromRGBO(185, 144, 87, 1)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3;
+    const segment = _size / 6;
+
+    addAll([
+      RectangleHitbox(
+        position: Vector2(
+          0,
+          0,
+        ),
+        size: Vector2(
+          segment * 6,
+          _boundarySize,
+        ),
+      )
+        ..paint = paint
+        ..renderShape = true,
+      RectangleHitbox(
+        position: Vector2(
+          segment * 6,
+          segment * 0,
+        ),
+        size: Vector2(
+          _boundarySize,
+          segment * 4,
+        ),
+      )
+        ..paint = paint
+        ..renderShape = true,
+      RectangleHitbox(
+        position: Vector2(
+          segment * 4,
+          segment * 4,
+        ),
+        size: Vector2(
+          segment * 2,
+          _boundarySize,
+        ),
+      )
+        ..paint = paint
+        ..renderShape = true,
+      RectangleHitbox(
+        position: Vector2(
+          segment * 4,
+          segment * 4,
+        ),
+        size: Vector2(
+          _boundarySize,
+          segment * 2,
+        ),
+      )
+        ..paint = paint
+        ..renderShape = true,
+      RectangleHitbox(
+        position: Vector2(
+          0,
+          segment * 6,
+        ),
+        size: Vector2(
+          segment * 4,
+          _boundarySize,
+        ),
+      )
+        ..paint = paint
+        ..renderShape = true,
+      RectangleHitbox(
+        position: Vector2(
+          segment * 0,
+          segment * 0,
+        ),
+        size: Vector2(
+          _boundarySize,
+          segment * 6,
         ),
       )
         ..paint = paint
