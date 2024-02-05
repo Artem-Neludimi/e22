@@ -2,12 +2,14 @@ import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
+import 'package:go_router/go_router.dart';
 
 import '../core/navigation/sbp_router_jus.dart';
 import 'sbp_widgets_jus.dart';
 
 class SbpTermsOfUseScreenJus extends StatelessWidget {
-  const SbpTermsOfUseScreenJus({super.key});
+  const SbpTermsOfUseScreenJus({super.key, required this.isSettings});
+  final bool isSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,13 @@ You hereby grant to Company an irreversible, nonexclusive, royalty-free and full
                 ),
                 const SizedBox(height: 48),
                 SbpButtonJus(
-                  onPressed: () => SbpRoutesJus.onboarding.go(context),
+                  onPressed: () {
+                    if (isSettings) {
+                      context.pop();
+                    } else {
+                      SbpRoutesJus.onboarding.go(context);
+                    }
+                  },
                   text: 'I agree',
                 ),
               ],

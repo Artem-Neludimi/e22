@@ -28,7 +28,10 @@ final GoRouter sbpRouterJus = GoRouter(
     GoRoute(
       parentNavigatorKey: _routerKey,
       path: SbpRoutesJus.termsOfUse.path,
-      builder: (context, state) => const SbpTermsOfUseScreenJus(),
+      builder: (context, state) {
+        final isSettings = state.extra is! bool ? false : state.extra as bool;
+        return SbpTermsOfUseScreenJus(isSettings: isSettings);
+      },
     ),
     GoRoute(
       parentNavigatorKey: _routerKey,
