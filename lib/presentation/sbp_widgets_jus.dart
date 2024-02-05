@@ -238,11 +238,13 @@ class SbpAppBarJus extends PreferredSize {
 }
 
 class SbpMoneyBoardJus extends StatelessWidget {
-  final String money;
   const SbpMoneyBoardJus({
     super.key,
     required this.money,
+    this.size,
   });
+  final String money;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -260,6 +262,7 @@ class SbpMoneyBoardJus extends StatelessWidget {
                 money,
                 style: context.sourceCode(
                   color: const Color.fromRGBO(224, 176, 104, 1),
+                  size: size ?? 22,
                 ),
               ),
             ),

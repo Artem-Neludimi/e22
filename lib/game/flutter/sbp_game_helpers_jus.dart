@@ -186,72 +186,82 @@ class _SbpWinDialogJus extends StatelessWidget {
         child: Center(
           child: Stack(
             children: [
-              Assets.images.sbpDialogJus.image(),
-              Positioned(
-                top: 62,
-                right: 0,
-                left: 0,
-                child: Center(
-                  child: Text(
-                    'YOU WIN',
-                    style: context.berlinSans(size: 44),
+              Assets.images.sbpMoneyJus.image(height: double.infinity, width: double.infinity, fit: BoxFit.cover),
+              Positioned.fill(
+                child: Align(
+                  alignment: const Alignment(0.5, -0.5),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Assets.images.sbpWinDialogJus.image(),
+                      Positioned(
+                        top: 69,
+                        right: 0,
+                        left: 0,
+                        child: Center(
+                          child: Text(
+                            'YOU WIN',
+                            style: context.berlinSans(size: 44),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 160,
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Column(
+                          children: [
+                            Text(
+                              'Level is cleared',
+                              style: context.sourceSans(
+                                size: 38,
+                                color: Colors.white,
+                                weight: FontWeight.w900,
+                              ),
+                            ),
+                            const Spacer(flex: 2),
+                            Text(
+                              'Your prize:',
+                              style: context.sourceSans(
+                                size: 37,
+                                color: Colors.white,
+                                weight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Align(
+                              alignment: const Alignment(0.1, 0),
+                              child: SizedBox(
+                                width: 180,
+                                child: SbpMoneyBoardJus(
+                                  money: gameConfigCubit.state.score.toString(),
+                                  size: 45,
+                                ),
+                              ),
+                            ),
+                            const Spacer(),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
               Positioned(
-                top: 170,
-                bottom: 120,
-                right: 0,
-                left: 0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Your prize:',
-                      style: context.berlinSans(
-                        size: 44,
-                        color: Colors.white,
-                        weight: FontWeight.w100,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Assets.images.sbpCrownJus.image(
-                          height: 44,
-                          fit: BoxFit.fitHeight,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          gameConfigCubit.state.score.toString(),
-                          style: context.berlinSans(
-                            size: 44,
-                            color: Colors.white,
-                            weight: FontWeight.w100,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Positioned(
-                bottom: 30,
-                right: 45,
-                left: 45,
-                child: Column(
-                  children: [
-                    SbpButtonJus(
-                      isBlack: true,
-                      text: 'Return to map',
-                      onPressed: () {
-                        while (context.canPop()) {
-                          context.pop();
-                        }
-                      },
-                    ),
-                  ],
+                bottom: 100,
+                left: 50,
+                right: 38,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: SbpButtonJus(
+                    text: 'Return to map',
+                    onPressed: () {
+                      while (context.canPop()) {
+                        context.pop();
+                      }
+                    },
+                  ),
                 ),
               ),
             ],

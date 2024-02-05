@@ -72,6 +72,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpMenuBgJus =>
       const AssetGenImage('assets/images/sbp_menu_bg_jus.png');
 
+  /// File path: assets/images/sbp_money_jus.png
+  AssetGenImage get sbpMoneyJus =>
+      const AssetGenImage('assets/images/sbp_money_jus.png');
+
   /// File path: assets/images/sbp_onboarding_bg_1_jus.png
   AssetGenImage get sbpOnboardingBg1Jus =>
       const AssetGenImage('assets/images/sbp_onboarding_bg_1_jus.png');
@@ -128,6 +132,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpTermsOfUseBgJus =>
       const AssetGenImage('assets/images/sbp_terms_of_use_bg_jus.png');
 
+  /// File path: assets/images/sbp_win_dialog_jus.png
+  AssetGenImage get sbpWinDialogJus =>
+      const AssetGenImage('assets/images/sbp_win_dialog_jus.png');
+
   /// File path: assets/images/wx2.png
   AssetGenImage get wx2 => const AssetGenImage('assets/images/wx2.png');
 
@@ -157,6 +165,7 @@ class $AssetsImagesGen {
         sbpGameBgJus,
         sbpGameOnboardingDialogJus,
         sbpMenuBgJus,
+        sbpMoneyJus,
         sbpOnboardingBg1Jus,
         sbpOnboardingBg2Jus,
         sbpOnboardingBg3Jus,
@@ -171,6 +180,7 @@ class $AssetsImagesGen {
         sbpTasksBgJus,
         sbpTasksJus,
         sbpTermsOfUseBgJus,
+        sbpWinDialogJus,
         wx2,
         wx3,
         x2,
