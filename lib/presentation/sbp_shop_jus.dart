@@ -1,9 +1,11 @@
 import 'package:e22/core/extensions/sbp_context_extensions_jus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 import '../core/assets/gen/assets.gen.dart';
+import '../logic/sbp_app_cubit_jus.dart';
 import 'sbp_widgets_jus.dart';
 
 class SbpShopJus extends StatefulWidget {
@@ -17,6 +19,9 @@ class SbpShopJus extends StatefulWidget {
 class _SbpShopJusState extends State<SbpShopJus> {
   @override
   Widget build(BuildContext context) {
+    final appCubit = context.watch<SbpAppCubitJus>();
+    final appState = appCubit.state;
+    final boughtImages = appState.boughtImages;
     return Stack(
       children: [
         Assets.images.sbpShopBgJus.image(
@@ -32,16 +37,89 @@ class _SbpShopJusState extends State<SbpShopJus> {
             child: ListView(
               children: [
                 _item(
+                  onTap: () {
+                    if (appState.cubeImage != Assets.images.sbpCubeJus.path) {
+                      appCubit.changeCubeImage(Assets.images.sbpCubeJus.path);
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: const Text('Already using this cube'),
+                            content: const Text('You are already using this cube'),
+                            actions: [
+                              CupertinoDialogAction(
+                                child: const Text('Ok'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
                   Center(child: Assets.images.sbpCubeJus.image(height: 75, width: 75)),
                   'Simple Cube',
                   'Reskin for cube',
-                  'Using',
+                  appState.cubeImage == Assets.images.sbpCubeJus.path ? 'In use' : 'Equip',
                 ),
                 _item(
+                  onTap: () {
+                    if (appState.cubeImage != Assets.images.sbpCube2Jus.path &&
+                        boughtImages.contains(Assets.images.sbpCube2Jus.path)) {
+                      appCubit.changeCubeImage(Assets.images.sbpCube2Jus.path);
+                    } else if (boughtImages.contains(Assets.images.sbpCube2Jus.path)) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: const Text('Already using this cube'),
+                            content: const Text('You are already using this cube'),
+                            actions: [
+                              CupertinoDialogAction(
+                                child: const Text('Ok'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      try {
+                        context.read<SbpAppCubitJus>().tryBuyImage(Assets.images.sbpCube2Jus.path, 400);
+                      } catch (e) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              title: const Text('Not enough credits'),
+                              content: const Text('Earn more credits by playing the game!'),
+                              actions: [
+                                CupertinoDialogAction(
+                                  child: const Text('Ok'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    }
+                  },
                   Center(child: Assets.images.sbpCube2Jus.image(height: 75, width: 75)),
                   'Dark Triangle',
                   'Reskin for cube',
-                  '400',
+                  !boughtImages.contains(Assets.images.sbpCube2Jus.path)
+                      ? '400'
+                      : appState.cubeImage == Assets.images.sbpCube2Jus.path
+                          ? 'In use'
+                          : 'Equip',
                 ),
                 _item(
                   Center(child: Assets.images.sbpCube3Jus.image(height: 75, width: 75)),

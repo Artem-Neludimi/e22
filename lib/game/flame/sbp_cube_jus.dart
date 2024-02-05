@@ -5,7 +5,6 @@ import 'package:flame_bloc/flame_bloc.dart';
 
 import 'sbp_game_jus.dart';
 import 'sbp_level_boundaries_jus.dart';
-import '../../core/assets/gen/assets.gen.dart';
 
 class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, CollisionCallbacks {
   SbpCubeJus() : super(priority: 2);
@@ -18,7 +17,7 @@ class SbpCubeJus extends SpriteComponent with HasGameRef<SbpFlameGameJus>, Colli
 
   @override
   Future<void> onLoad() async {
-    sprite = await gameRef.loadSprite(Assets.images.sbpCubeJus.path);
+    sprite = await gameRef.loadSprite(gameRef.appCubit.state.cubeImage);
     size = Vector2.all(_size);
     anchor = Anchor.center;
     add(RectangleHitbox()..renderShape = false);
