@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:e22/core/extensions/sbp_context_extensions_jus.dart';
 import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:e22/logic/sbp_app_cubit_jus.dart';
+import 'package:e22/logic/sbp_bonus_cubit_jus.dart';
 import 'package:e22/presentation/sbp_settings_jus.dart';
 import 'package:e22/presentation/sbp_shop_jus.dart';
 import 'package:e22/presentation/sbp_tasks_jus.dart';
@@ -209,8 +210,23 @@ class SbpAppBarJus extends PreferredSize {
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  Text('DAILY\nBONUS:', style: context.sourceCode(size: 18)),
+                  const SizedBox(width: 3),
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13),
+                      color: const Color.fromRGBO(225, 18, 18, 1),
+                    ),
+                    child: Text(
+                      context.select<SbpBonusCubitJus, String>(
+                        (value) => value.state.time,
+                      ),
+                      style: context.sourceCode(),
+                    ),
+                  ),
+                  const Spacer(),
                   SbpMoneyBoardJus(
                     money: context.watch<SbpAppCubitJus>().state.score.toString(),
                   ),
