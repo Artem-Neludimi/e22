@@ -50,11 +50,15 @@ class _SbpSplashScreenJusState extends State<SbpSplashScreenJus> {
 
   Future<void> _sbpHandleNavigationJus() async {
     await Future.delayed(const Duration(seconds: 2));
-    SbpRoutesJus.termsOfUse.go(context);
+    if (sbpPrefsJus.getBool('isFirstTime') == null) {
+      SbpRoutesJus.termsOfUse.go(context);
+    } else {
+      SbpRoutesJus.menu.go(context);
+    }
   }
 
   Future<void> _sbpInitDependenciesJus() async {
-    rlfPrefsPog = await SharedPreferences.getInstance();
+    sbpPrefsJus = await SharedPreferences.getInstance();
     FlameAudio.bgm.initialize();
   }
 

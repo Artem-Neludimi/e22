@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension RlfContextExtensionsPog on BuildContext {
+extension SbpContextExtensionsJus on BuildContext {
   void showSnackBar(String message) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(

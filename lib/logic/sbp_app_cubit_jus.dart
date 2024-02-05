@@ -5,20 +5,20 @@ class SbpAppCubitJus extends Cubit<SbpAppStateJus> {
   SbpAppCubitJus()
       : super(
           SbpAppStateJus(
-            score: rlfPrefsPog.getInt('score') ?? 0,
-            levelsFinished: rlfPrefsPog.getInt('levelsFinished') ?? 0,
-            boughtLevels: rlfPrefsPog.getStringList('boughtLevels')?.map((e) => int.parse(e)).toList() ?? [0, 1, 2],
-            notification: rlfPrefsPog.getBool('notification') ?? true,
+            score: sbpPrefsJus.getInt('score') ?? 0,
+            levelsFinished: sbpPrefsJus.getInt('levelsFinished') ?? 0,
+            boughtLevels: sbpPrefsJus.getStringList('boughtLevels')?.map((e) => int.parse(e)).toList() ?? [0, 1, 2],
+            notification: sbpPrefsJus.getBool('notification') ?? true,
           ),
         );
 
   void addScore(int score) {
-    rlfPrefsPog.setInt('score', state.score + score);
+    sbpPrefsJus.setInt('score', state.score + score);
     emit(state.copyWith(score: state.score + score));
   }
 
   void addLevelsFinished() {
-    rlfPrefsPog.setInt('levelsFinished', state.levelsFinished + 1);
+    sbpPrefsJus.setInt('levelsFinished', state.levelsFinished + 1);
     emit(state.copyWith(levelsFinished: state.levelsFinished + 1));
   }
 
@@ -26,12 +26,12 @@ class SbpAppCubitJus extends Cubit<SbpAppStateJus> {
     if (state.score < price) throw Exception('Not enough score');
     final boughtLevels = state.boughtLevels;
     boughtLevels.add(level);
-    rlfPrefsPog.setStringList('boughtLevels', boughtLevels.map((e) => e.toString()).toList());
+    sbpPrefsJus.setStringList('boughtLevels', boughtLevels.map((e) => e.toString()).toList());
     emit(state.copyWith(boughtLevels: boughtLevels));
   }
 
   void toggleNotification() {
-    rlfPrefsPog.setBool('notification', !state.notification);
+    sbpPrefsJus.setBool('notification', !state.notification);
     emit(state.copyWith(notification: !state.notification));
   }
 }
