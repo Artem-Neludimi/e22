@@ -34,7 +34,8 @@ class SbpBonusCubitJus extends Cubit<SbpBonusStateJus> {
   }
 
   String _getTime() {
-    final bonusTimeUnix = sbpPrefsJus.getInt('bonusUnixTime')!;
+    final bonusTimeUnix = sbpPrefsJus.getInt('bonusUnixTime');
+    if (bonusTimeUnix == null) return '24:00';
     final bonusTimeDateTime = DateTime.fromMillisecondsSinceEpoch(bonusTimeUnix);
     final timeDifference = bonusTimeDateTime.add(const Duration(days: 1)).difference(DateTime.now());
     final hours = (timeDifference.inHours % 24).toString().padLeft(2, '0');
