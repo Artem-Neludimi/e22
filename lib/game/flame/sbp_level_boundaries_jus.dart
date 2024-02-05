@@ -49,16 +49,29 @@ class SbpLevelBoundariesJus extends RectangleComponent
       case 1:
         _level2Hitbox();
       default:
-        _level1Hitbox();
+        _level2Hitbox();
     }
   }
 
   void _manageCubeInitialPosition() {
     final cube = world.cube;
-    cube.position = Vector2(
-      gameRef.size.x / 2 - _size / 2 + 24,
-      gameRef.size.y / 2 - _size / 6 + 24,
-    );
+    switch (gameRef.level) {
+      case 0:
+        cube.position = Vector2(
+          gameRef.size.x / 2 - _size / 2 + 24,
+          gameRef.size.y / 2 - _size / 6 + 24,
+        );
+      case 1:
+        cube.position = Vector2(
+          gameRef.size.x / 2 - _size / 2 + 24,
+          gameRef.size.y / 2 - _size / 6 + 24,
+        );
+      default:
+        cube.position = Vector2(
+          gameRef.size.x / 2 - _size / 2 + 24,
+          gameRef.size.y / 2 - _size / 6 + 24,
+        );
+    }
   }
 
   void _manageTargetInitialPosition() {
@@ -78,8 +91,8 @@ class SbpLevelBoundariesJus extends RectangleComponent
         );
       default:
         target.position = Vector2(
-          gameRef.size.x / 2 + segment * 3 - half,
-          gameRef.size.y / 2 + segment * 2 - half,
+          gameRef.size.x / 2 - segment * 3 + half,
+          gameRef.size.y / 2 + half,
         );
     }
   }
