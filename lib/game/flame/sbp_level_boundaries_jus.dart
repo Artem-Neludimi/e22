@@ -99,7 +99,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
 
   void _level1Hitbox() {
     final paint = Paint()
-      ..color = const Color.fromRGBO(0, 144, 87, 0)
+      ..color = const Color.fromRGBO(185, 144, 87, 1)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3;
     const segment = _size / 6;
@@ -158,7 +158,7 @@ class SbpLevelBoundariesJus extends RectangleComponent
 
   void _level2Hitbox() {
     final paint = Paint()
-      ..color = const Color.fromRGBO(0, 144, 87, 0)
+      ..color = const Color.fromRGBO(185, 144, 87, 1)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3;
     const segment = _size / 6;
