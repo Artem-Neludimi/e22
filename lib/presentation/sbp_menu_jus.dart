@@ -6,8 +6,10 @@ import 'dart:math';
 import 'package:e22/core/extensions/sbp_context_extensions_jus.dart';
 import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:e22/logic/sbp_app_cubit_jus.dart';
+import 'package:e22/logic/sbp_bonus_cubit_jus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
@@ -35,6 +37,9 @@ class _SbpMenuJusState extends State<SbpMenuJus> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SbpBonusCubitJus>().init();
+    });
     _redirect();
   }
 
@@ -51,34 +56,51 @@ class _SbpMenuJusState extends State<SbpMenuJus> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: Assets.images.sbpMenuBgJus.provider(),
-          fit: BoxFit.cover,
+    return BlocListener<SbpBonusCubitJus, SbpBonusStateJus>(
+      bloc: context.read<SbpBonusCubitJus>(),
+      listenWhen: (previous, current) {
+        return previous.showBonus == false && current.showBonus == true;
+      },
+      listener: (context, state) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const _BonusDialog();
+          },
+        ).whenComplete(() {
+          context.read<SbpBonusCubitJus>().setBonusTime();
+          context.read<SbpAppCubitJus>().addScore(100);
+        });
+      },
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Assets.images.sbpMenuBgJus.provider(),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Scaffold(
-        appBar: SbpAppBarJus(context: context),
-        bottomNavigationBar: widget.bottomNavigationBar,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            reverse: true,
-            child: Wrap(
-              verticalDirection: VerticalDirection.up,
-              children: List.generate(
-                40,
-                (index) {
-                  if (index % 3 == 0) return Center(child: _Item(index));
-                  return SizedBox(
-                    width: context.width / 2,
-                    child: Center(
-                      child: _Item(index),
-                    ),
-                  );
-                },
+        child: Scaffold(
+          appBar: SbpAppBarJus(context: context),
+          bottomNavigationBar: widget.bottomNavigationBar,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Wrap(
+                verticalDirection: VerticalDirection.up,
+                children: List.generate(
+                  40,
+                  (index) {
+                    if (index % 3 == 0) return Center(child: _Item(index));
+                    return SizedBox(
+                      width: context.width / 2,
+                      child: Center(
+                        child: _Item(index),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -173,6 +195,105 @@ class _Item extends StatelessWidget {
                 ),
               ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _BonusDialog extends StatefulWidget {
+  const _BonusDialog();
+
+  @override
+  State<_BonusDialog> createState() => _BonusDialogState();
+}
+
+class _BonusDialogState extends State<_BonusDialog> {
+  Alignment _alignment = Alignment.centerLeft;
+  bool _showReward = false;
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      child: GestureDetector(
+        onHorizontalDragUpdate: (details) async {
+          if (details.primaryDelta! > 0) {
+            setState(() => _alignment = Alignment.centerRight);
+            await Future.delayed(const Duration(milliseconds: 700));
+            setState(() => _showReward = true);
+          }
+        },
+        child: Material(
+          color: Colors.transparent,
+          child: Center(
+            child: Stack(
+              children: [
+                Assets.images.sbpDialogJus.image(),
+                Positioned(
+                  top: 70,
+                  left: 20,
+                  right: 20,
+                  child: Text(
+                    'DAILY BONUS',
+                    style: context.berlinSans(
+                      size: 35,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Positioned(
+                  top: 150,
+                  bottom: 20,
+                  left: 35,
+                  right: 35,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Spacer(flex: 2),
+                      Stack(
+                        children: [
+                          Assets.images.sbpBonusLineJus.image(),
+                          Positioned(
+                            top: 4,
+                            bottom: 4,
+                            left: 4,
+                            right: 2,
+                            child: AnimatedAlign(
+                              duration: const Duration(milliseconds: 400),
+                              alignment: _alignment,
+                              child: Assets.images.sbpCubeJus.image(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(flex: 2),
+                      if (_showReward == false)
+                        Text(
+                          'Swipe cube to get your\nprize',
+                          textAlign: TextAlign.center,
+                          style: context.sourceCode(),
+                        )
+                      else ...[
+                        Text('Your reward:', style: context.sourceCode()),
+                        const SizedBox(height: 12),
+                        const SizedBox(width: 150, child: SbpMoneyBoardJus(money: '100')),
+                      ],
+                      const Spacer(flex: 3),
+                      if (_showReward == false)
+                        Assets.images.sbpPointerJus.image()
+                      else
+                        SbpButtonJus(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          text: 'Get reward',
+                        )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

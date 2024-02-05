@@ -19,6 +19,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpBoardJus =>
       const AssetGenImage('assets/images/sbp_board_jus.png');
 
+  /// File path: assets/images/sbp_bonus_line_jus.png
+  AssetGenImage get sbpBonusLineJus =>
+      const AssetGenImage('assets/images/sbp_bonus_line_jus.png');
+
   /// File path: assets/images/sbp_crown_jus.png
   AssetGenImage get sbpCrownJus =>
       const AssetGenImage('assets/images/sbp_crown_jus.png');
@@ -59,6 +63,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpPauseJus =>
       const AssetGenImage('assets/images/sbp_pause_jus.png');
 
+  /// File path: assets/images/sbp_pointer_jus.png
+  AssetGenImage get sbpPointerJus =>
+      const AssetGenImage('assets/images/sbp_pointer_jus.png');
+
   /// File path: assets/images/sbp_rate_jus.png
   AssetGenImage get sbpRateJus =>
       const AssetGenImage('assets/images/sbp_rate_jus.png');
@@ -94,6 +102,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         sbpBoardJus,
+        sbpBonusLineJus,
         sbpCrownJus,
         sbpCubeJus,
         sbpDialogJus,
@@ -104,6 +113,7 @@ class $AssetsImagesGen {
         sbpOnboardingBg2Jus,
         sbpOnboardingBg3Jus,
         sbpPauseJus,
+        sbpPointerJus,
         sbpRateJus,
         sbpRestartJus,
         sbpShareJus,
