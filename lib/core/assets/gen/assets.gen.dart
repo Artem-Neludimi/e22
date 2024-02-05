@@ -15,6 +15,15 @@ import 'package:lottie/lottie.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/bg_.png
+  AssetGenImage get bg => const AssetGenImage('assets/images/bg_.png');
+
+  /// File path: assets/images/bg_2.png
+  AssetGenImage get bg2 => const AssetGenImage('assets/images/bg_2.png');
+
+  /// File path: assets/images/bg_3.png
+  AssetGenImage get bg3 => const AssetGenImage('assets/images/bg_3.png');
+
   /// File path: assets/images/sbp_board_jus.png
   AssetGenImage get sbpBoardJus =>
       const AssetGenImage('assets/images/sbp_board_jus.png');
@@ -23,13 +32,29 @@ class $AssetsImagesGen {
   AssetGenImage get sbpBonusLineJus =>
       const AssetGenImage('assets/images/sbp_bonus_line_jus.png');
 
+  /// File path: assets/images/sbp_counter_jus.png
+  AssetGenImage get sbpCounterJus =>
+      const AssetGenImage('assets/images/sbp_counter_jus.png');
+
   /// File path: assets/images/sbp_crown_jus.png
   AssetGenImage get sbpCrownJus =>
       const AssetGenImage('assets/images/sbp_crown_jus.png');
 
+  /// File path: assets/images/sbp_cube_2_jus.png
+  AssetGenImage get sbpCube2Jus =>
+      const AssetGenImage('assets/images/sbp_cube_2_jus.png');
+
+  /// File path: assets/images/sbp_cube_3_jus.png
+  AssetGenImage get sbpCube3Jus =>
+      const AssetGenImage('assets/images/sbp_cube_3_jus.png');
+
   /// File path: assets/images/sbp_cube_jus.png
   AssetGenImage get sbpCubeJus =>
       const AssetGenImage('assets/images/sbp_cube_jus.png');
+
+  /// File path: assets/images/sbp_cube_jus_3.png
+  AssetGenImage get sbpCubeJus3 =>
+      const AssetGenImage('assets/images/sbp_cube_jus_3.png');
 
   /// File path: assets/images/sbp_dialog_jus.png
   AssetGenImage get sbpDialogJus =>
@@ -79,6 +104,10 @@ class $AssetsImagesGen {
   AssetGenImage get sbpShareJus =>
       const AssetGenImage('assets/images/sbp_share_jus.png');
 
+  /// File path: assets/images/sbp_shop_bg_jus.png
+  AssetGenImage get sbpShopBgJus =>
+      const AssetGenImage('assets/images/sbp_shop_bg_jus.png');
+
   /// File path: assets/images/sbp_splash_bg_jus.png
   AssetGenImage get sbpSplashBgJus =>
       const AssetGenImage('assets/images/sbp_splash_bg_jus.png');
@@ -99,12 +128,31 @@ class $AssetsImagesGen {
   AssetGenImage get sbpTermsOfUseBgJus =>
       const AssetGenImage('assets/images/sbp_terms_of_use_bg_jus.png');
 
+  /// File path: assets/images/wx2.png
+  AssetGenImage get wx2 => const AssetGenImage('assets/images/wx2.png');
+
+  /// File path: assets/images/wx3.png
+  AssetGenImage get wx3 => const AssetGenImage('assets/images/wx3.png');
+
+  /// File path: assets/images/x2.png
+  AssetGenImage get x2 => const AssetGenImage('assets/images/x2.png');
+
+  /// File path: assets/images/x3.png
+  AssetGenImage get x3 => const AssetGenImage('assets/images/x3.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+        bg,
+        bg2,
+        bg3,
         sbpBoardJus,
         sbpBonusLineJus,
+        sbpCounterJus,
         sbpCrownJus,
+        sbpCube2Jus,
+        sbpCube3Jus,
         sbpCubeJus,
+        sbpCubeJus3,
         sbpDialogJus,
         sbpGameBgJus,
         sbpGameOnboardingDialogJus,
@@ -117,11 +165,16 @@ class $AssetsImagesGen {
         sbpRateJus,
         sbpRestartJus,
         sbpShareJus,
+        sbpShopBgJus,
         sbpSplashBgJus,
         sbpTargetJus,
         sbpTasksBgJus,
         sbpTasksJus,
-        sbpTermsOfUseBgJus
+        sbpTermsOfUseBgJus,
+        wx2,
+        wx3,
+        x2,
+        x3
       ];
 }
 
