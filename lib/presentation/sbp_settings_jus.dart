@@ -3,6 +3,7 @@ import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:e22/presentation/sbp_widgets_jus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:rate_my_app/rate_my_app.dart';
@@ -10,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../core/assets/gen/assets.gen.dart';
+import '../logic/rlf_app_cubit_pog.dart';
 
 class SbpSettingsJus extends StatefulWidget {
   const SbpSettingsJus({super.key, required this.bottomNavigationBar});
@@ -22,6 +24,7 @@ class SbpSettingsJus extends StatefulWidget {
 class _SbpSettingsJusState extends State<SbpSettingsJus> {
   @override
   Widget build(BuildContext context) {
+    final appCubit = context.watch<SbpAppCubitJus>();
     return Stack(
       children: [
         Assets.images.sbpGameBgJus.image(
@@ -39,12 +42,15 @@ class _SbpSettingsJusState extends State<SbpSettingsJus> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _item(
+                    onTap: () => appCubit.toggleNotification(),
                     'Notification',
                     CupertinoSwitch(
                       activeColor: const Color.fromRGBO(240, 219, 106, 1),
                       trackColor: const Color.fromRGBO(194, 148, 75, 1),
-                      value: true,
-                      onChanged: (value) {},
+                      value: appCubit.state.notification,
+                      onChanged: (value) {
+                        appCubit.toggleNotification();
+                      },
                     ),
                   ),
                   const SizedBox(height: 12),
