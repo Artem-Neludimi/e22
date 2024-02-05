@@ -18,7 +18,7 @@ class SbpTasksJus extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         Scaffold(
-          appBar: SbpAppBarJus(),
+          appBar: SbpAppBarJus(context: context),
           bottomNavigationBar: bottomNavigationBar,
           body: Padding(
             padding: const EdgeInsets.all(24),

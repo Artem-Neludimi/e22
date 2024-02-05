@@ -16,10 +16,11 @@ class SbpGameScreenJus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true,
+      canPop: false,
       child: SbpProviderJus(
         index: index,
         child: SbpGameListenersJus(
+          index: index,
           child: _SbpGameViewJus(index),
         ),
       ),
@@ -37,16 +38,16 @@ class _SbpGameViewJus extends StatefulWidget {
 
 class _SbpGameViewJusState extends State<_SbpGameViewJus> {
   late final Game game;
-  late final RLFAppCubitPog appCubit;
+  late final SbpAppCubitJus appCubit;
   late final SbpGameConfigCubit gameConfigCubit;
   late final SbpCubeBlocJus cubeBloc;
   @override
   void initState() {
     cubeBloc = context.read<SbpCubeBlocJus>();
-    appCubit = context.read<RLFAppCubitPog>();
+    appCubit = context.read<SbpAppCubitJus>();
     gameConfigCubit = context.read<SbpGameConfigCubit>();
     game = SbpFlameGameJus(cubeBloc, appCubit, gameConfigCubit, widget.level);
-    if (widget.level == 0) gameConfigCubit.sbpShowOnboardingJus();
+    gameConfigCubit.sbpShowOnboardingJus();
     super.initState();
   }
 

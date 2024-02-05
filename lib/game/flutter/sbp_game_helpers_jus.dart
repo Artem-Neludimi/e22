@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/game/logic/sbp_game_config_cubit.dart';
+import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:e22/presentation/sbp_widgets_jus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,9 +37,11 @@ class SbpProviderJus extends StatelessWidget {
 class SbpGameListenersJus extends StatefulWidget {
   const SbpGameListenersJus({
     super.key,
+    required this.index,
     required this.child,
   });
 
+  final int index;
   final Widget child;
 
   @override
@@ -49,6 +52,7 @@ class _SbpGameListenersJusState extends State<SbpGameListenersJus> {
   @override
   Widget build(BuildContext context) {
     final gameConfigCubit = context.read<SbpGameConfigCubit>();
+    final appCubit = context.read<SbpAppCubitJus>();
     return MultiBlocListener(
       listeners: [
         BlocListener<SbpGameConfigCubit, SbpGameConfigState>(
@@ -76,9 +80,12 @@ class _SbpGameListenersJusState extends State<SbpGameListenersJus> {
           listener: (context, state) async {
             await showDialog(
               context: context,
-              builder: (context) => _SbpWinDialogJus(gameConfigCubit),
+              builder: (context) => _SbpWinDialogJus(gameConfigCubit, appCubit),
             );
-            context.read<SbpGameConfigCubit>().sbpHideOnboardingJus();
+            if (appCubit.state.levelsFinished <= widget.index) {
+              appCubit.addLevelsFinished();
+              appCubit.addScore(gameConfigCubit.state.score);
+            }
           },
         ),
       ],
@@ -167,8 +174,9 @@ class _SbpPauseDialogJus extends StatelessWidget {
 }
 
 class _SbpWinDialogJus extends StatelessWidget {
-  const _SbpWinDialogJus(this.gameConfigCubit);
+  const _SbpWinDialogJus(this.gameConfigCubit, this.appCubit);
   final SbpGameConfigCubit gameConfigCubit;
+  final SbpAppCubitJus appCubit;
   @override
   Widget build(BuildContext context) {
     return PopScope(

@@ -30,7 +30,7 @@ class _SbpSettingsJusState extends State<SbpSettingsJus> {
           fit: BoxFit.cover,
         ),
         Scaffold(
-          appBar: SbpAppBarJus(),
+          appBar: SbpAppBarJus(context: context),
           bottomNavigationBar: widget.bottomNavigationBar,
           body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),

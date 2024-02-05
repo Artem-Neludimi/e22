@@ -5,7 +5,9 @@ import 'dart:math';
 
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/core/navigation/sbp_router_jus.dart';
+import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
@@ -59,7 +61,7 @@ class _SbpMenuJusState extends State<SbpMenuJus> {
         ),
       ),
       child: Scaffold(
-        appBar: SbpAppBarJus(),
+        appBar: SbpAppBarJus(context: context),
         bottomNavigationBar: widget.bottomNavigationBar,
         body: SafeArea(
           child: SingleChildScrollView(
@@ -92,10 +94,14 @@ class _Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isAvailable = index == 0;
+    final boughtLevels = context.watch<SbpAppCubitJus>().state.boughtLevels;
+    final levelsFinished = context.watch<SbpAppCubitJus>().state.levelsFinished;
+    final isAvailable = boughtLevels.contains(index) && levelsFinished >= index;
     return GestureDetector(
       onTap: () {
-        SbpRoutesJus.game.push(context, extra: index);
+        if (isAvailable) {
+          SbpRoutesJus.game.push(context, extra: index);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32),
@@ -146,50 +152,16 @@ class _Item extends StatelessWidget {
                 ),
               ),
             ),
-            if (index != 0 && index != 1 && index != 2) ...[
+            if (index != 0 && index != 1 && index != 2)
               Positioned(
                 bottom: -20,
-                left: 10,
-                right: 10,
+                left: 20,
+                right: 9,
                 height: 35,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(30, 30, 30, 1),
-                    borderRadius: BorderRadius.circular(15),
-                    border: const GradientBoxBorder(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color.fromRGBO(224, 176, 104, 1),
-                          Color.fromRGBO(78, 56, 38, 1),
-                        ],
-                      ),
-                    ),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '${index * 800}',
-                      style: context.sourceSans(
-                        size: 22,
-                        color: const Color.fromRGBO(224, 176, 104, 1),
-                        weight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
+                child: SbpMoneyBoardJus(
+                  money: '${index * 800}',
                 ),
               ),
-              Positioned(
-                bottom: -15,
-                right: 10,
-                child: Assets.images.sbpCrownJus.image(
-                  height: 30,
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-            ],
           ],
         ),
       ),

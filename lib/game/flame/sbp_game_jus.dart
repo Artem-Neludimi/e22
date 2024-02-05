@@ -14,7 +14,7 @@ import 'sbp_world_jus.dart';
 class SbpFlameGameJus extends FlameGame with HasCollisionDetection, VerticalDragDetector, HorizontalDragDetector {
   final SbpCubeBlocJus cubeBloc;
   final SbpGameConfigCubit gameConfigCubit;
-  final RLFAppCubitPog appCubit;
+  final SbpAppCubitJus appCubit;
   final int level;
   SbpFlameGameJus(this.cubeBloc, this.appCubit, this.gameConfigCubit, this.level) : super(world: SbpWorldJus());
 

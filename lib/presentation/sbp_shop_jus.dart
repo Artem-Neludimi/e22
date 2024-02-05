@@ -9,7 +9,7 @@ class SbpShopJus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SbpAppBarJus(),
+      appBar: SbpAppBarJus(context: context),
       bottomNavigationBar: bottomNavigationBar,
     );
   }

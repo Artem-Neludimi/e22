@@ -2,12 +2,14 @@ import 'dart:ui';
 
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/core/navigation/sbp_router_jus.dart';
+import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:e22/presentation/sbp_settings_jus.dart';
 import 'package:e22/presentation/sbp_shop_jus.dart';
 import 'package:e22/presentation/sbp_tasks_jus.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 import 'sbp_menu_jus.dart';
@@ -192,9 +194,10 @@ class SbpBoardJus extends StatelessWidget {
 }
 
 class SbpAppBarJus extends PreferredSize {
-  SbpAppBarJus({super.key})
+  final BuildContext context;
+  SbpAppBarJus({super.key, required this.context})
       : super(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: const Size.fromHeight(55),
           child: Container(
             decoration: const BoxDecoration(
               gradient: SweepGradient(
@@ -202,8 +205,52 @@ class SbpAppBarJus extends PreferredSize {
                 colors: _sbpGradientColorsJus,
               ),
             ),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SbpMoneyBoardJus(
+                    money: context.watch<SbpAppCubitJus>().state.score.toString(),
+                  ),
+                ],
+              ),
+            ),
           ),
         );
+}
+
+class SbpMoneyBoardJus extends StatelessWidget {
+  final String money;
+  const SbpMoneyBoardJus({
+    super.key,
+    required this.money,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Assets.images.sbpBoardJus.image(),
+        Positioned(
+          top: 0,
+          bottom: 0,
+          left: 15,
+          right: 40,
+          child: Center(
+            child: FittedBox(
+              child: Text(
+                money,
+                style: context.sourceCode(
+                  color: const Color.fromRGBO(224, 176, 104, 1),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
 }
 
 const _sbpGradientColorsJus = [
