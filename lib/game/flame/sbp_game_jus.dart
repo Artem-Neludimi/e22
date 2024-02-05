@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:e22/game/logic/sbp_cube_bloc_jus.dart';
 import 'package:e22/game/logic/sbp_game_config_cubit.dart';
-import 'package:e22/logic/rlf_app_cubit_pog.dart';
+import 'package:e22/logic/sbp_app_cubit_jus.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';

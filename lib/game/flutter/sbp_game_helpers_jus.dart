@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:e22/core/extensions/rlf_context_extensions_pog.dart';
 import 'package:e22/game/logic/sbp_game_config_cubit.dart';
-import 'package:e22/logic/rlf_app_cubit_pog.dart';
+import 'package:e22/logic/sbp_app_cubit_jus.dart';
 import 'package:e22/presentation/sbp_widgets_jus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

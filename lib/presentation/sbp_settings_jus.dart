@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../core/assets/gen/assets.gen.dart';
-import '../logic/rlf_app_cubit_pog.dart';
+import '../logic/sbp_app_cubit_jus.dart';
 
 class SbpSettingsJus extends StatefulWidget {
   const SbpSettingsJus({super.key, required this.bottomNavigationBar});
