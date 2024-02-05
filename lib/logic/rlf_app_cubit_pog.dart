@@ -22,7 +22,7 @@ class SbpAppCubitJus extends Cubit<SbpAppStateJus> {
     emit(state.copyWith(levelsFinished: state.levelsFinished + 1));
   }
 
-  void buyLevel(int level, int price) {
+  void tryBuyLevel(int level, int price) {
     if (state.score < price) throw Exception('Not enough score');
     final boughtLevels = state.boughtLevels;
     boughtLevels.add(level);

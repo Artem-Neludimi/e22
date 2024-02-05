@@ -8,6 +8,7 @@ import 'package:e22/core/navigation/sbp_router_jus.dart';
 import 'package:e22/logic/rlf_app_cubit_pog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
@@ -97,10 +98,20 @@ class _Item extends StatelessWidget {
     final boughtLevels = context.watch<SbpAppCubitJus>().state.boughtLevels;
     final levelsFinished = context.watch<SbpAppCubitJus>().state.levelsFinished;
     final isAvailable = boughtLevels.contains(index) && levelsFinished >= index;
+    final price = index * 800;
     return GestureDetector(
       onTap: () {
         if (isAvailable) {
           SbpRoutesJus.game.push(context, extra: index);
+        } else {
+          try {
+            context.read<SbpAppCubitJus>().tryBuyLevel(index, price);
+          } catch (e) {
+            showDialog(
+              context: context,
+              builder: (context) => const NotEnoughMoneyDialog(),
+            );
+          }
         }
       },
       child: Padding(
@@ -152,14 +163,14 @@ class _Item extends StatelessWidget {
                 ),
               ),
             ),
-            if (index != 0 && index != 1 && index != 2)
+            if (!boughtLevels.contains(index))
               Positioned(
                 bottom: -20,
                 left: 20,
                 right: 9,
                 height: 35,
                 child: SbpMoneyBoardJus(
-                  money: '${index * 800}',
+                  money: '$price',
                 ),
               ),
           ],

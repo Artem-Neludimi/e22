@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:e22/core/assets/gen/assets.gen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 import 'sbp_menu_jus.dart';
@@ -264,3 +265,60 @@ const _sbpGradientColorsJus = [
   Color.fromRGBO(238, 188, 112, 1),
   Color.fromRGBO(106, 62, 40, 1),
 ];
+
+class NotEnoughMoneyDialog extends StatelessWidget {
+  const NotEnoughMoneyDialog({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Material(
+          color: Colors.transparent,
+          child: Stack(
+            children: [
+              Assets.images.sbpDialogJus.image(),
+              Positioned(
+                top: 65,
+                left: 20,
+                right: 20,
+                child: Text(
+                  'BUY LEVEL',
+                  style: context.berlinSans(
+                    size: 40,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Positioned.fill(
+                child: Center(
+                  child: Text(
+                    'Not enough credits!',
+                    textAlign: TextAlign.center,
+                    style: context.sourceCode(size: 44),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 20,
+                left: 45,
+                right: 45,
+                child: SbpButtonJus(
+                  isBlack: true,
+                  text: 'Cancel',
+                  onPressed: () {
+                    context.pop();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
