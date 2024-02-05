@@ -285,8 +285,9 @@ const _sbpGradientColorsJus = [
 class NotEnoughMoneyDialog extends StatelessWidget {
   const NotEnoughMoneyDialog({
     super.key,
+    this.message,
   });
-
+  final String? message;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -313,9 +314,9 @@ class NotEnoughMoneyDialog extends StatelessWidget {
               Positioned.fill(
                 child: Center(
                   child: Text(
-                    'Not enough credits!',
+                    message ?? 'Not enough\ncredits!',
                     textAlign: TextAlign.center,
-                    style: context.sourceCode(size: 44),
+                    style: context.sourceCode(size: 33),
                   ),
                 ),
               ),
@@ -325,7 +326,7 @@ class NotEnoughMoneyDialog extends StatelessWidget {
                 right: 45,
                 child: SbpButtonJus(
                   isBlack: true,
-                  text: 'Cancel',
+                  text: 'Ok',
                   onPressed: () {
                     context.pop();
                   },

@@ -23,7 +23,7 @@ class SbpAppCubitJus extends Cubit<SbpAppStateJus> {
   }
 
   void tryBuyLevel(int level, int price) {
-    if (state.score < price) throw Exception('Not enough score');
+    if (state.score < price) throw Exception('Not enough credits');
     final boughtLevels = state.boughtLevels;
     boughtLevels.add(level);
     sbpPrefsJus.setStringList('boughtLevels', boughtLevels.map((e) => e.toString()).toList());

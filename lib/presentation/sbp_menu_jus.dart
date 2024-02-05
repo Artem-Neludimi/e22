@@ -130,7 +130,8 @@ class _Item extends StatelessWidget {
           } catch (e) {
             showDialog(
               context: context,
-              builder: (context) => const NotEnoughMoneyDialog(),
+              builder: (context) =>
+                  NotEnoughMoneyDialog(message: boughtLevels.contains(index) ? 'Finish previous\nlevels first' : null),
             );
           }
         }
